@@ -67,16 +67,6 @@ const sidebars: SidebarsConfig = {
         },
       ],
     },
-    {
-      type: 'doc',
-      id: 'capstone', // points to website/docs/capstone.md
-      label: 'Capstone Project',
-    },
-    {
-      type: 'doc',
-      id: 'appendices', // points to website/docs/appendices.md
-      label: 'Appendices',
-    },
   ],
 };
 
