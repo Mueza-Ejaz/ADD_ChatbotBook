@@ -1,0 +1,28 @@
+# Node.js
+node_modules/
+dist/
+build/
+*.log
+.env*
+.docusaurus/
+.docusaurus-cache/
+yarn-error.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+celerybeat-schedule
+.DS_Store
+
+# General
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+*.tmp
