@@ -7,7 +7,7 @@ from google.api_core.exceptions import GoogleAPIError
 
 from src.main import app
 from src.database import get_db
-from src.exceptions import GeminiAPIException, DatabaseException
+from src.exceptions import ChatSessionNotFoundException, GeminiAPIException, DatabaseException
 
 # Define a test database URL
 TEST_DATABASE_URL = "sqlite+aiosqlite:///:memory:"
@@ -50,14 +50,14 @@ async def test_chat_endpoint_handles_openai_api_error(db_session_override):
 @pytest.mark.asyncio
 async def test_chat_endpoint_handles_database_operational_error(db_session_override):
     # Mock the AsyncSessionLocal to raise an OperationalError during a commit/flush
-    with patch('src.database.AsyncSessionLocal', new_callable=AsyncMock) as MockAsyncSessionLocal:
+    with patch('src.database.get_session_maker', new_callable=AsyncMock) as MockGetSessionMaker:
         mock_session_instance = AsyncMock()
         mock_session_instance.__aenter__.return_value = mock_session_instance
         mock_session_instance.__aexit__.return_value = False # Don't suppress exception
         
         # Simulate an operational error on commit
         mock_session_instance.commit.side_effect = OperationalError(None, None, "Database connection lost")
-        MockAsyncSessionLocal.return_value = mock_session_instance
+        MockGetSessionMaker.return_value = lambda: mock_session_instance # get_session_maker returns a callable
 
         async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
             response = await client.post(
@@ -66,3 +66,17 @@ async def test_chat_endpoint_handles_database_operational_error(db_session_overr
             )
         assert response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR
         assert "Database error: (sqlite3.OperationalError) Database connection lost" in response.json()["detail"]
+
+
+@pytest.mark.asyncio
+async def test_chat_endpoint_handles_chat_session_not_found(db_session_override):
+    session_id = 'non-existent-session-id'
+    with patch('src.services.session_manager.SessionManager.find_or_create_session', side_effect=ChatSessionNotFoundException(session_id)):
+        async with AsyncClient(transport=ASGITransport(app=app), base_url='http://test') as client:
+            response = await client.post(
+                '/chat',
+                json={'session_id': session_id, 'message': 'Test message'}
+            )
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+        assert f'Chat session with ID \'{session_id}\' not found.' in response.json()['detail']
+

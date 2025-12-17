@@ -1,9 +1,12 @@
 import sys
 import os
 from typing import AsyncGenerator
+from dotenv import load_dotenv # Import load_dotenv
 
 # Add the 'backend' directory to sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+load_dotenv() # Load environment variables before any other imports that might depend on them
 
 import pytest
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker

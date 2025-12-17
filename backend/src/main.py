@@ -43,6 +43,12 @@ app.add_middleware(
 
 @app.get("/health")
 async def health_check():
+    """
+    Checks the health of the application.
+
+    Returns:
+        dict: A dictionary with a status of "healthy".
+    """
     logger.info("Health check endpoint called.") # Log health check
     return {"status": "healthy"}
 
@@ -51,7 +57,28 @@ async def health_check():
 async def chat_endpoint(
     request: ChatRequest,
     db_session: Annotated[AsyncSession, Depends(get_db)]
-):
+) -> ChatResponse:
+    """
+    Handles chat interactions, managing sessions, messages, and AI responses.
+
+    If no session_id is provided, a new chat session is created.
+    The user's message is saved, an AI response is generated based on conversation history
+    and optionally selected text, and the AI's response is also saved.
+
+    Args:
+        request (ChatRequest): The incoming chat request containing the message,
+                               optional session_id, and optional selected_text.
+        db_session (Annotated[AsyncSession, Depends(get_db)]): Asynchronous database session.
+
+    Returns:
+        ChatResponse: The AI's response and the session_id.
+
+    Raises:
+        ChatSessionNotFoundException: If a provided session_id does not exist.
+        GeminiAPIException: If an error occurs during interaction with the Gemini API.
+        DatabaseException: If a database-related error occurs.
+        HTTPException: For validation errors (422) or unexpected internal server errors (500).
+    """
     try:
         logger.info(f"Chat request received: session_id={request.session_id}, message='{request.message}'")
 

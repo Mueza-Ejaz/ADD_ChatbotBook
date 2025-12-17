@@ -108,11 +108,10 @@ def run_migrations_online() -> None:
 
             with context.begin_transaction():
                 context.run_migrations()
-
-        await connectable.dispose()
-
+    
     import asyncio
     asyncio.run(run_async_migrations())
+    asyncio.run(connectable.dispose())
 
 
 if context.is_offline_mode():
