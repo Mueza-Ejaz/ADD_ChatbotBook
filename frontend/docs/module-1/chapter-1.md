@@ -8,4 +8,4 @@ Physical AI refers to intelligent systems that interact with the physical world.
 
 ### Subsection 1.1.1: Key Concepts
 
-Key concepts include embodiment, situatedness, and interaction.
+Key concepts include embodiment, situatedness, and interaction. These concepts are fundamental to understanding how AI systems operate in physical environments.

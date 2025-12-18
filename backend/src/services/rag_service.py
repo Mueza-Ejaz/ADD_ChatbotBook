@@ -12,7 +12,7 @@ load_dotenv()
 class RAGService:
     def __init__(self):
         self.qdrant_client = self._initialize_qdrant_client()
-        self.embedding_model = "models/embedding-001" # Gemini embedding model
+        self.embedding_model = "models/text-embedding-004" # Gemini embedding model for gemini-2.5-flash
         genai.configure(api_key=os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY"))
 
     def _initialize_qdrant_client(self):

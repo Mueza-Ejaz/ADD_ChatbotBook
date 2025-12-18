@@ -6,7 +6,8 @@ This phase focuses on implementing Retrieval-Augmented Generation (RAG) to enhan
 
 **Key Components:**
 *   **Qdrant Cloud**: Vector database for storing and searching textbook content embeddings.
-*   **OpenAI Embedding API**: Used for generating vector embeddings for text chunks and user queries.
+*   **Gemini API for Embeddings**: Used for generating vector embeddings for text chunks and user queries.
+*   **OpenAI Chat Completion API**: Used for generating chat responses based on the provided context.
 *   **Sync Tool (`sync_book_to_qdrant.py`)**: A standalone Python script to process Docusaurus Markdown files, chunk them, embed them, and upload them to Qdrant.
 *   **RAG Service (`rag_service.py`)**: A new backend module responsible for orchestrating the retrieval process, including query embedding, Qdrant search, and returning relevant text passages.
 *   **FastAPI `/chat` Endpoint**: Modification of the existing endpoint to integrate the RAG service, construct context-aware prompts, and pass them to the OpenAI chat completion API.
@@ -32,7 +33,7 @@ This phase focuses on implementing Retrieval-Augmented Generation (RAG) to enhan
 *   **Technical Standards**:
     *   **Code Quality**: Type hints, docstrings, and linting will be enforced for new Python code (`rag_service.py`, sync tool).
     *   **Testing Requirements**: Unit and integration tests are explicitly planned for `rag_service.py` and the `/chat` endpoint.
-    *   **Security Guidelines**: API keys for OpenAI and Qdrant will be managed via environment variables. `POST /ingest` endpoint will require authentication.
+    *   **Security Guidelines**: API keys for Gemini (for embeddings), OpenAI (for chat completion), and Qdrant will be managed via environment variables. `POST /ingest` endpoint will require authentication.
     *   **Performance Benchmarks**: Latency and throughput NFRs are defined for the `/chat` endpoint.
 
 *   **Development Workflow**:
@@ -43,7 +44,7 @@ This phase focuses on implementing Retrieval-Augmented Generation (RAG) to enhan
 
 *   **Phase-Specific Guidelines (Phase 5 - RAG System Implementation)**:
     *   **Vector DB Schema**: Qdrant Cloud schema defined in `spec.md` with `physical_ai_textbook` collection and payload metadata.
-    *   **Embedding Strategy**: `text-embedding-3-small` via OpenAI API is the chosen strategy.
+    *   **Embedding Strategy**: `gemini-2.5-flash` via Gemini API is the chosen strategy.
     *   **Content Sync Process**: `sync_book_to_qdrant.py` tool is specifically designed for this purpose.
 
 *   **Quality Gates & Validation**:
@@ -168,7 +169,7 @@ async def get_relevant_context(
 *   **Objective**: Establish the vector database infrastructure and local development tools.
 *   **Key Tasks**:
     1.  Create a Qdrant Cloud account and a new free-tier cluster.
-    2.  Create a collection named `physical_ai_textbook` with `vector_size=1536` (for `text-embedding-3-small`) and `distance_metric=Cosine`.
+    2.  Create a collection named `physical_ai_textbook` with `vector_size=768` (for `gemini-2.5-flash`) and `distance_metric=Cosine`.
     3.  Obtain and securely store the Qdrant API key and URL in the backend's `.env` file.
     4.  Install the `qdrant-client` Python library (`poetry add qdrant-client`) in the Phase 2 backend project.
     5.  Write a simple connection test script (e.g., `python backend/scripts/test_qdrant_connection.py`) to verify communication with the Qdrant cluster (create/list/delete a dummy collection).
@@ -181,7 +182,7 @@ async def get_relevant_context(
 *   **Key Tasks**:
     1.  Analyze the Phase 1 Docusaurus book structure (`frontend/docs/`) to locate all source Markdown files.
     2.  Implement a `TextChunker` utility that splits Markdown by headings or tokens into coherent chunks (~300 words). Research best practices for robust Markdown parsing and chunking.
-    3.  Implement an `EmbeddingGenerator` utility that uses the OpenAI embeddings API (`text-embedding-3-small`) to create vectors for each chunk. Handle OpenAI API key securely and implement basic retry logic for API calls.
+    3.  Implement an `EmbeddingGenerator` utility that uses the Gemini API (`gemini-2.5-flash`) to create vectors for each chunk. Handle Gemini API key securely and implement basic retry logic for API calls.
     4.  Implement a `QdrantIngestor` utility that formats each chunk with metadata (`source`, `chapter`, `heading`/`section`) and upserts it to the `physical_ai_textbook` collection.
     5.  Assemble these components into a runnable script: `python tools/sync_book_to_qdrant.py`. This script should accept command-line arguments for paths to Docusaurus `docs/` and optionally a flag to force full re-sync.
 *   **Dependencies**: Milestone 1 must be complete. Requires access to Phase 1 book content.
@@ -193,7 +194,7 @@ async def get_relevant_context(
 *   **Objective**: Develop the backend service module that performs retrieval.
 *   **Key Tasks**:
     1.  Create a `rag_service.py` module in `backend/src/services/`.
-    2.  Implement `_generate_query_embedding(query: str)` private helper function using OpenAI embeddings API.
+    2.  Implement `_generate_query_embedding(query: str)` private helper function using Gemini embeddings API.
     3.  Implement `_build_qdrant_filter(selected_text_hint: Optional[str])` private helper function to parse `selected_text_hint` and construct Qdrant filter clauses based on inferred `source`, `chapter`, or `section`.
     4.  Implement the `retrieve_relevant_context(query: str, limit: int = 3, selected_text_hint: Optional[str] = None) -> List[Dict]` function. This function will:
         *   Generate embedding for the `query`.
@@ -238,7 +239,7 @@ async def get_relevant_context(
         *   Verify that the chatbot's response is updated and grounded in the *newly updated* content.
     2.  Test the `selected_text` bonus feature thoroughly from the frontend, ensuring highlighting text appropriately narrows and influences search results, leading to more focused answers.
     3.  Perform load testing on the `/chat` endpoint to ensure acceptable latency (considering embedding + Qdrant search + OpenAI completion times) under anticipated load.
-    4.  Add comprehensive monitoring/logging for key RAG steps: OpenAI embedding calls, Qdrant search results count, and latency at various stages.
+    4.  Add comprehensive monitoring/logging for key RAG steps: Gemini embedding calls, Qdrant search results count, and latency at various stages.
     5.  Prepare final documentation: Update the main `README.md` with an explanation of the RAG architecture, instructions for running the sync tool, and details on configuring Qdrant/OpenAI.
     6.  Verify all Acceptance Criteria from the Phase 5 `spec.md` are met.
 *   **Dependencies**: All previous milestones must be complete.

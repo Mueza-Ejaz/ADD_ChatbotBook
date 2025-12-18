@@ -1,7 +1,7 @@
 import os
 from typing import Annotated, List
 from dotenv import load_dotenv
-from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi import FastAPI, Depends, HTTPException, status, Header
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import ValidationError
@@ -42,6 +42,25 @@ app.add_middleware(
 async def async_get_rag_service() -> RAGService:
     return RAGService()
 
+async def verify_api_key(x_api_key: Annotated[str, Header()]) -> bool:
+    """
+    Dependency to verify API key for ingestion endpoint.
+    """
+    ingestion_api_key = os.getenv("INGESTION_API_KEY")
+    if not ingestion_api_key:
+        logger.error("INGESTION_API_KEY is not set in environment variables.")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Server configuration error: Ingestion API key not set."
+        )
+    if x_api_key != ingestion_api_key:
+        logger.warning("Unauthorized ingestion attempt with invalid API key.")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid API Key"
+        )
+    return True
+
 @app.get("/health")
 async def health_check():
     """
@@ -55,8 +74,8 @@ async def health_check():
 
 @app.post("/ingest")
 async def ingest_data(
+    authenticated: Annotated[bool, Depends(verify_api_key)],
     force_resync: bool = False, # Parameter to allow forcing a full resync
-    # Later: add authentication dependency here
 ):
     """
     Triggers the data ingestion process to synchronize book content with Qdrant.

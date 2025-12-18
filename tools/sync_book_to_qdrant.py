@@ -8,6 +8,7 @@ from qdrant_client import QdrantClient, models # Import Qdrant client
 import argparse
 from dotenv import load_dotenv
 import glob # For finding markdown files
+from loguru import logger # Add logger import
 
 # Assume markdown-it-py is available from the backend environment
 try:
@@ -126,10 +127,10 @@ class EmbeddingGenerator:
     """
     Generates embeddings for text chunks using Gemini's API, with retry logic.
     """
-    def __init__(self, model: str = "models/embedding-001", api_key: Optional[str] = None):
+    def __init__(self, model: str = "models/text-embedding-004", api_key: Optional[str] = None):
         self.model = model
         # Configure Gemini API key
-        genai.configure(api_key=api_key or os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY"))
+        genai.configure(api_key=api_key or os.getenv("GEMINI_API_KEY"))
 
     # Gemini API for embeddings does not currently have RateLimitError or APIError
     # defined in a way that backoff can catch directly as it does for OpenAI.
@@ -156,13 +157,16 @@ class EmbeddingGenerator:
         if not texts:
             return []
         
+        logger.debug(f"Attempting to generate embeddings for {len(texts)} texts. First text snippet: '{texts[0][:100]}...'")
+        
         try:
             # Gemini's embed_content_async can take a list of contents
             response = await genai.embed_content_async(
                 model=self.model,
                 content=texts
             )
-            return [item['embedding'] for item in response['embeddings']]
+            return response['embedding']
+
         except Exception as e:
             print(f"Error generating batch embeddings with Gemini API: {e}")
             raise # Re-raise
@@ -177,7 +181,7 @@ class QdrantIngestor:
             url=qdrant_url or os.getenv("QDRANT_URL"),
             api_key=qdrant_api_key or os.getenv("QDRANT_API_KEY"),
         )
-        self.vector_size = 768 # Default for 'models/embedding-001' (Gemini)
+        self.vector_size = 768 # For 'gemini-2.5-flash' text embeddings
         self.distance_metric = models.Distance.COSINE
 
     async def ensure_collection_exists(self, force_recreate: bool = False):
@@ -249,13 +253,15 @@ async def sync_book_to_qdrant(docs_path: str, collection_name: str, force_resync
     """
     load_dotenv(os.path.join(os.path.dirname(__file__), '..', 'backend', '.env'))
 
-    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+    GEMINI_API_KEY = os.getenv("GEMINI_API_KEY") 
     QDRANT_URL = os.getenv("QDRANT_URL")
     QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 
     if not all([GEMINI_API_KEY, QDRANT_URL, QDRANT_API_KEY]):
         print("Error: Missing GEMINI_API_KEY/GOOGLE_API_KEY, QDRANT_URL, or QDRANT_API_KEY in environment variables.")
         return
+    
+    logger.info(f"Loaded GEMINI_API_KEY: {GEMINI_API_KEY[:4]}...{GEMINI_API_KEY[-4:]}")
 
     chunker = TextChunker()
     embedding_generator = EmbeddingGenerator(api_key=GEMINI_API_KEY)
@@ -319,3 +325,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     asyncio.run(sync_book_to_qdrant(args.docs_path, args.collection_name, args.force_resync))
+
+    

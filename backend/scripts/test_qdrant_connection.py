@@ -29,7 +29,7 @@ async def test_qdrant_connection():
         print(f"Creating collection '{collection_name}'...")
         client.create_collection(
             collection_name=collection_name,
-            vectors_config=models.VectorParams(size=1536, distance=models.Distance.COSINE),
+            vectors_config=models.VectorParams(size=768, distance=models.Distance.COSINE),
         )
         print(f"Collection '{collection_name}' created successfully.")
 

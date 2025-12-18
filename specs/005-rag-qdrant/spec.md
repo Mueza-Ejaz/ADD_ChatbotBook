@@ -22,7 +22,7 @@ graph TD
 ```
 
 **Components:**
-*   **Embedding Model**: `text-embedding-3-small` or similar via OpenAI API.
+*   **Embedding Model**: `gemini-2.5-flash` or similar via Gemini API.
 *   **Vector Database**: Qdrant Cloud (serverless) to store and search document embeddings.
 *   **RAG Orchestrator**: A new backend service/module (`rag_service.py`) that coordinates the retrieval and generation steps.
 
@@ -41,8 +41,8 @@ All book content Markdown files from Phase 1 (Docusaurus `docs/` directory).
     *   **Granularity**: Target chunks of approximately 200-400 words (e.g., by section, paragraph, or a fixed token window with overlap). The exact chunking strategy will be refined during implementation to optimize retrieval effectiveness.
 
 2.  **Embedding**:
-    *   **Model**: Generate a vector embedding for each text chunk using the chosen embedding model (`text-embedding-3-small` via OpenAI API).
-    *   **API**: Utilize the OpenAI Embeddings API for vector generation.
+    *   **Model**: Generate a vector embedding for each text chunk using the chosen embedding model (`gemini-2.5-flash` via Gemini API).
+    *   **API**: Utilize the Gemini Embeddings API for vector generation.
 
 3.  **Storage**:
     *   Store each chunk along with its embedding, original text, and metadata as a point in a Qdrant collection.
@@ -65,7 +65,7 @@ All book content Markdown files from Phase 1 (Docusaurus `docs/` directory).
 
 ### Vector Configuration
 
-*   **Size**: Matches the output dimension of the chosen embedding model (e.g., 1536 for `text-embedding-3-small`).
+*   **Size**: Matches the output dimension of the chosen embedding model (e.g., 768 for `gemini-2.5-flash`).
 *   **Distance Metric**: Cosine similarity (common for text embeddings).
 
 ### Payload (Metadata) Schema
@@ -162,7 +162,8 @@ The existing Phase 2 `POST /chat` endpoint will be modified to integrate the RAG
 
 ## 8. Assumptions
 
-*   **OpenAI API Access**: Assumes valid OpenAI API keys are available for both embedding generation and LLM calls.
+*   **Gemini API Access**: Assumes valid Gemini API keys are available for embedding generation.
+*   **OpenAI API Access**: Assumes valid OpenAI API keys are available for LLM calls.
 *   **Qdrant Cloud Access**: Assumes a Qdrant Cloud instance is provisioned and accessible with necessary API keys.
 *   **Docusaurus Docs Structure**: Assumes Phase 1 book content (Markdown files) remains in the `docs/` directory within the Docusaurus project.
 *   **Backend Modularity**: Assumes the existing FastAPI backend (Phase 2) is modular enough to allow for the addition of new services and modification of endpoints without significant refactoring.
@@ -171,9 +172,9 @@ The existing Phase 2 `POST /chat` endpoint will be modified to integrate the RAG
 
 *   **Phase 1: Book Content**: Markdown files for ingestion.
 *   **Phase 2: FastAPI Backend**: Existing `/chat` endpoint infrastructure.
-*   **OpenAI API**: For embedding generation and LLM inference.
-*   **Qdrant Cloud**: Vector database service.
-*   **Python Libraries**: `qdrant-client`, `openai`, `fastapi`, `pydantic`, `markdown-it-py` (or similar for markdown parsing).
+*   **Gemini API**: For embedding generation.
+*   **OpenAI API**: For LLM inference.
+*   **Python Libraries**: `qdrant-client`, `google-generativeai`, `openai`, `fastapi`, `pydantic`, `markdown-it-py` (or similar for markdown parsing).
 
 ## 10. Non-Functional Requirements (NFRs)
 
