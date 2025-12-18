@@ -20,6 +20,10 @@ const config: Config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/Bookplus_Chatbot/',
 
+  scripts: [
+    'https://cdn.platform.openai.com/deployments/chatkit/chatkit.js',
+  ],
+
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: '<YOUR_GITHUB_USERNAME_OR_ORG>', // Usually your GitHub org/user name.
