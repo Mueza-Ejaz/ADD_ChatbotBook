@@ -23,13 +23,13 @@ Milestone 1 (Setup) -> Milestone 2 (Sync Tool) -> Milestone 3 (RAG Service) -> M
 **Story Goal**: Establish the vector database infrastructure and local development tools, and configure the backend to connect to it.
 **Independent Test Criteria**: A Python script can successfully connect to the Qdrant Cloud cluster and perform basic operations (e.g., create/list/delete a dummy collection).
 
-- [ ] T001 Create a Qdrant Cloud account and a new free-tier cluster.
-- [ ] T002 Create Qdrant collection `physical_ai_textbook` with `vector_size=1536` and `distance_metric=Cosine` (can be manual or via script)
-- [ ] T003 Obtain Qdrant API key and URL.
-- [ ] T004 Securely store Qdrant API key and URL in `backend/.env` (e.g., `QDRANT_API_KEY`, `QDRANT_URL`).
-- [ ] T005 Install `qdrant-client` Python library in the backend project: `poetry add qdrant-client` in `backend/`
-- [ ] T006 [P] Create `backend/scripts/test_qdrant_connection.py` to verify Qdrant connection and collection operations.
-- [ ] T007 Run `backend/scripts/test_qdrant_connection.py` to validate Qdrant connection (AC-001 validation).
+- [x] T001 Create a Qdrant Cloud account and a new free-tier cluster.
+- [x] T002 Create Qdrant collection `physical_ai_textbook` with `vector_size=1536` and `distance_metric=Cosine` (can be manual or via script)
+- [x] T003 Obtain Qdrant API key and URL.
+- [x] T004 Securely store Qdrant API key and URL in `backend/.env` (e.g., `QDRANT_API_KEY`, `QDRANT_URL`).
+- [x] T005 Install `qdrant-client` Python library in the backend project: `poetry add qdrant-client` in `backend/`
+- [x] T006 [P] Create `backend/scripts/test_qdrant_connection.py` to verify Qdrant connection and collection operations.
+- [x] T007 Run `backend/scripts/test_qdrant_connection.py` to validate Qdrant connection (AC-001 validation).
 
 ---
 
@@ -38,12 +38,12 @@ Milestone 1 (Setup) -> Milestone 2 (Sync Tool) -> Milestone 3 (RAG Service) -> M
 **Story Goal**: Build a standalone tool to chunk, embed, and upload the textbook content to Qdrant.
 **Independent Test Criteria**: Running `tools/sync_book_to_qdrant.py` successfully populates the Qdrant collection with points containing correct vectors and metadata.
 
-- [ ] T008 Create `tools/` directory in project root.
-- [ ] T009 Create `tools/sync_book_to_qdrant.py` script.
-- [ ] T010 [P] Implement `TextChunker` utility within `tools/sync_book_to_qdrant.py` to split Markdown files from `frontend/docs/` into coherent chunks (~300 words).
-- [ ] T011 [P] Implement `EmbeddingGenerator` utility within `tools/sync_book_to_qdrant.py` to use OpenAI embeddings API (`text-embedding-3-small`) to create vectors for chunks, including rate limiting and retry logic.
-- [ ] T012 [P] Implement `QdrantIngestor` utility within `tools/sync_book_to_qdrant.py` to format chunks with metadata (`source`, `chapter`, `section`) and upsert to Qdrant.
-- [ ] T013 Integrate `TextChunker`, `EmbeddingGenerator`, and `QdrantIngestor` into `tools/sync_book_to_qdrant.py` with command-line arguments.
+- [x] T008 Create `tools/` directory in project root.
+- [x] T009 Create `tools/sync_book_to_qdrant.py` script.
+- [x] T010 [P] Implement `TextChunker` utility within `tools/sync_book_to_qdrant.py` to split Markdown files from `frontend/docs/` into coherent chunks (~300 words).
+- [x] T011 [P] Implement `EmbeddingGenerator` utility within `tools/sync_book_to_qdrant.py` to use OpenAI embeddings API (`text-embedding-3-small`) to create vectors for chunks, including rate limiting and retry logic.
+- [x] T012 [P] Implement `QdrantIngestor` utility within `tools/sync_book_to_qdrant.py` to format chunks with metadata (`source`, `chapter`, `section`) and upsert to Qdrant.
+- [x] T013 Integrate `TextChunker`, `EmbeddingGenerator`, and `QdrantIngestor` into `tools/sync_book_to_qdrant.py` with command-line arguments.
 - [ ] T014 Run `tools/sync_book_to_qdrant.py` with `frontend/docs/` as input to populate Qdrant (AC-002 validation).
 - [ ] T015 Verify sample Qdrant points for correct data, vectors, and metadata.
 

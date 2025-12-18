@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "src"}] # Add this line
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+fastapi = "^0.104.1" # Example version, will be aligned by poetry install from poetry.lock
+uvicorn = {extras = ["standard"], version = "^0.23.2"} # Example version
+qdrant-client = "^1.7.0" # Version to be added
+openai = "^1.6.1" # Example version
+pydantic = "^2.5.3" # Example version
+python-dotenv = "^1.0.0" # For .env file handling
+markdown-it-py = "^2.2.0" # For markdown parsing in sync tool/backend utilities
+google-generativeai = "^0.8.6"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3" # Example version
+pytest-asyncio = "^0.21.1" # Example version
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
