@@ -14,12 +14,12 @@
 *   **Goal**: A cohesive color palette and typography system is defined and documented within the `spec.md`.
 *   **Independent Test Criteria**: The `spec.md` contains clear sections for Color Palette, Typography, Spacing, Icons, and Imagery Guidelines.
 *   **Implementation Tasks**:
-    - [ ] T001 [US1] Audit current Docusaurus theme structure in `frontend/`.
-    - [ ] T002 [US1] Audit Phase 3 chat widget structure (`frontend/src/components/Chatbot/`).
-    - [ ] T003 [US1] Define "Robotics Professional" color palette as CSS variables in `frontend/src/css/custom.css`.
-    - [ ] T004 [US1] Define typography scale (font stack, heading sizes) as CSS variables in `frontend/src/css/custom.css`.
-    - [ ] T005 [US1] Apply global CSS resets and base styles (body, headings, links) using new tokens in `frontend/src/css/custom.css`.
-    - [ ] T006 [US1] Verify color contrast for accessibility (WCAG AA) in both light/dark modes (manual review of `frontend/src/css/custom.css` values against spec).
+    - [x] T001 [US1] Audit current Docusaurus theme structure in `frontend/`.
+    - [x] T002 [US1] Audit Phase 3 chat widget structure (`frontend/src/components/Chatbot/`).
+    - [x] T003 [US1] Define "Robotics Professional" color palette as CSS variables in `frontend/src/css/custom.css`.
+    - [x] T004 [US1] Define typography scale (font stack, heading sizes) as CSS variables in `frontend/src/css/custom.css`.
+- [x] T005 [US1] Apply global CSS resets and base styles (body, headings, links) using new design tokens in `frontend/src/css/custom.css`.
+    - [x] T006 [US1] Verify color contrast for accessibility (WCAG AA) in both light/dark modes (manual review of `frontend/src/css/custom.css` values against spec).
 
 ## Phase 2: Foundational (Milestone 2: Docusaurus Core Component Styling)
 
