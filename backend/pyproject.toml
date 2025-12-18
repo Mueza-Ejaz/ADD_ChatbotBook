@@ -16,6 +16,8 @@ pydantic = "^2.5.3" # Example version
 python-dotenv = "^1.0.0" # For .env file handling
 markdown-it-py = "^2.2.0" # For markdown parsing in sync tool/backend utilities
 google-generativeai = "^0.8.6"
+sqlalchemy = "^2.0.45"
+loguru = "^0.7.3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.3" # Example version

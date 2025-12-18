@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 from sqlalchemy import Column, DateTime, ForeignKey, Text, Enum
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, Mapped # Import Mapped
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -13,7 +13,7 @@ class ChatSession(Base):
     id: uuid.UUID = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     created_at: datetime = Column(DateTime, default=datetime.utcnow)
     updated_at: datetime = Column(DateTime, default=lambda: datetime.utcnow(), onupdate=lambda: datetime.utcnow()) # Use lambda for onupdate
-    messages: list["Message"] = relationship("Message", back_populates="session")
+    messages: Mapped[list["Message"]] = relationship("Message", back_populates="session") # Use Mapped for relationship
 
 class Message(Base):
     """Represents a message within a chat session."""
@@ -23,4 +23,4 @@ class Message(Base):
     role: str = Column(Enum("user", "assistant", "system", name="message_role_enum"), nullable=False)
     content: str = Column(Text, nullable=False)
     created_at: datetime = Column(DateTime, default=datetime.utcnow)
-    session: ChatSession = relationship("ChatSession", back_populates="messages")
+    session: Mapped["ChatSession"] = relationship("ChatSession", back_populates="messages") # Also update Message.session

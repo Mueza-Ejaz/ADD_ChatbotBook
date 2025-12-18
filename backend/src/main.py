@@ -13,6 +13,7 @@ from src.services.session_manager import SessionManager
 from src.services.message_repository import MessageRepository
 from src.services.openai_client import GeminiClient
 from src.services.rag_service import RAGService
+from src.config.logging import setup_logging # Import setup_logging
 
 load_dotenv()
 
