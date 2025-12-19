@@ -44,8 +44,8 @@ Milestone 1 (Setup) -> Milestone 2 (Sync Tool) -> Milestone 3 (RAG Service) -> M
 - [x] T011 [P] Implement `EmbeddingGenerator` utility within `tools/sync_book_to_qdrant.py` to use OpenAI embeddings API (`text-embedding-3-small`) to create vectors for chunks, including rate limiting and retry logic.
 - [x] T012 [P] Implement `QdrantIngestor` utility within `tools/sync_book_to_qdrant.py` to format chunks with metadata (`source`, `chapter`, `section`) and upsert to Qdrant.
 - [x] T013 Integrate `TextChunker`, `EmbeddingGenerator`, and `QdrantIngestor` into `tools/sync_book_to_qdrant.py` with command-line arguments.
-- [ ] T014 Run `tools/sync_book_to_qdrant.py` with `frontend/docs/` as input to populate Qdrant (AC-002 validation).
-- [ ] T015 Verify sample Qdrant points for correct data, vectors, and metadata.
+- [x] T014 Run `tools/sync_book_to_qdrant.py` with `frontend/docs/` as input to populate Qdrant (AC-002 validation).
+- [x] T015 Verify sample Qdrant points for correct data, vectors, and metadata.
 
 ---
 
@@ -54,10 +54,10 @@ Milestone 1 (Setup) -> Milestone 2 (Sync Tool) -> Milestone 3 (RAG Service) -> M
 **Story Goal**: Develop the backend service module (`rag_service.py`) that performs retrieval from Qdrant.
 **Independent Test Criteria**: The `retrieve_relevant_context` function returns relevant text chunks with accurate metadata for example queries, both with and without `selected_text_hint`.
 
-- [ ] T016 [US1] Create `backend/src/services/rag_service.py` module.
-- [ ] T017 [P] [US1] Implement `_generate_query_embedding(query: str)` in `backend/src/services/rag_service.py` using OpenAI embeddings API.
-- [ ] T018 [P] [US1] Implement `_build_qdrant_filter(selected_text_hint: Optional[str])` in `backend/src/services/rag_service.py` to parse `selected_text_hint` and construct Qdrant filter clauses.
-- [ ] T019 [US1] Implement `retrieve_relevant_context(query: str, limit: int = 3, selected_text_hint: Optional[str] = None)` in `backend/src/services/rag_service.py`.
+- [x] T016 [US1] Create `backend/src/services/rag_service.py` module.
+- [x] T017 [P] [US1] Implement `_generate_query_embedding(query: str)` in `backend/src/services/rag_service.py` using OpenAI embeddings API.
+- [x] T018 [P] [US1] Implement `_build_qdrant_filter(selected_text_hint: Optional[str])` in `backend/src/services/rag_service.py` to parse `selected_text_hint` and construct Qdrant filter clauses.
+- [x] T019 [US1] Implement `retrieve_relevant_context(query: str, limit: int = 3, selected_text_hint: Optional[str] = None)` in `backend/src/services/rag_service.py`.
 - [ ] T020 [US1] Write unit tests for `retrieve_relevant_context` in `backend/tests/unit/test_rag_service.py` using mock Qdrant client (AC-003, AC-006 validation).
 
 ---
