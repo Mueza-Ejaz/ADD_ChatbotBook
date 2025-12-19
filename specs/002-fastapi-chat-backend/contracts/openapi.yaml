@@ -1,0 +1,119 @@
+openapi: 3.0.0
+info:
+  title: Minimalistic FastAPI Chat Backend API
+  version: 1.0.0
+  description: API for the Physical AI & Humanoid Robotics textbook chatbot, Phase 2.
+servers:
+  - url: http://localhost:8000
+    description: Local development server
+paths:
+  /chat:
+    post:
+      summary: Process user messages and get AI responses
+      operationId: postChat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Successful AI response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+  /health:
+    get:
+      summary: Health check endpoint
+      operationId: getHealth
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+components:
+  schemas:
+    ChatRequest:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The user's input message.
+        session_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: Optional. A unique identifier for the chat session. If not provided, a new session is initiated.
+        selected_text:
+          type: string
+          nullable: true
+          description: Optional. Text selected by the user, used for bonus feature (answers based solely on selected text).
+      required:
+        - message
+    ChatResponse:
+      type: object
+      properties:
+        response:
+          type: string
+          description: The AI's generated response.
+        session_id:
+          type: string
+          format: uuid
+          description: The identifier for the current chat session.
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO 8601 formatted timestamp of the AI's response.
+      required:
+        - response
+        - session_id
+        - timestamp
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Indicates the health of the service, e.g., "healthy".
+      required:
+        - status
+    HTTPValidationError:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    ValidationError:
+      type: object
+      properties:
+        loc:
+          type: array
+          items:
+            oneOf:
+              - type: string
+              - type: integer
+        msg:
+          type: string
+        type:
+          type: string
+    HTTPError:
+      type: object
+      properties:
+        detail:
+          type: string
