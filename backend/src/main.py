@@ -43,7 +43,7 @@ app.add_middleware(
 async def async_get_rag_service() -> RAGService:
     return RAGService()
 
-async def verify_api_key(x_api_key: Annotated[str, Header()]) -> bool:
+async def verify_api_key(x_api_key: str = Header(..., alias="X-API-Key")) -> bool:
     """
     Dependency to verify API key for ingestion endpoint.
     """
