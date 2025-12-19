@@ -58,7 +58,7 @@ Milestone 1 (Setup) -> Milestone 2 (Sync Tool) -> Milestone 3 (RAG Service) -> M
 - [x] T017 [P] [US1] Implement `_generate_query_embedding(query: str)` in `backend/src/services/rag_service.py` using OpenAI embeddings API.
 - [x] T018 [P] [US1] Implement `_build_qdrant_filter(selected_text_hint: Optional[str])` in `backend/src/services/rag_service.py` to parse `selected_text_hint` and construct Qdrant filter clauses.
 - [x] T019 [US1] Implement `retrieve_relevant_context(query: str, limit: int = 3, selected_text_hint: Optional[str] = None)` in `backend/src/services/rag_service.py`.
-- [ ] T020 [US1] Write unit tests for `retrieve_relevant_context` in `backend/tests/unit/test_rag_service.py` using mock Qdrant client (AC-003, AC-006 validation).
+- [x] T020 [US1] Write unit tests for `retrieve_relevant_context` in `backend/tests/unit/test_rag_service.py` using mock Qdrant client (AC-003, AC-006 validation).
 
 ---
 
@@ -67,18 +67,18 @@ Milestone 1 (Setup) -> Milestone 2 (Sync Tool) -> Milestone 3 (RAG Service) -> M
 **Story Goal**: Modify the FastAPI backend to use the RAG service and provide grounded answers via the `/chat` endpoint.
 **Independent Test Criteria**: The `/chat` endpoint returns accurate, grounded answers, handles cases with no relevant context, and correctly incorporates `selected_text` for filtering.
 
-- [ ] T021 [US2] Integrate `rag_service` into FastAPI's dependency injection/service layer in `backend/src/main.py`.
-- [ ] T022 [US2] Modify the `POST /chat` endpoint logic in `backend/src/main.py` to:
+- [x] T021 [US2] Integrate `rag_service` into FastAPI's dependency injection/service layer in `backend/src/main.py`.
+- [x] T022 [US2] Modify the `POST /chat` endpoint logic in `backend/src/main.py` to:
     *   Extract `message`, `session_id`, `selected_text`.
     *   Call `rag_service.retrieve_relevant_context`.
     *   Concatenate retrieved passages.
     *   Construct strict system prompt.
     *   Pass prompt and history to OpenAI.
-- [ ] T023 [US2] Update Pydantic `ChatResponse` model in `backend/src/schemas.py` to include optional `sources: List[str]`.
-- [ ] T024 [P] [US2] Create a new `POST /ingest` (admin) endpoint in `backend/src/main.py` that securely triggers the `sync_book_to_qdrant.py` tool.
-- [ ] T025 [US2] Implement basic authentication for the `/ingest` endpoint in `backend/src/main.py`.
-- [ ] T026 [US2] Write integration tests for modified `/chat` endpoint in `backend/tests/integration/test_rag_chat.py` (AC-001, AC-004, AC-005, AC-006 validation).
-- [ ] T027 [US2] Write integration tests for `/ingest` endpoint in `backend/tests/integration/test_ingest_endpoint.py` (AC-007 validation).
+- [x] T023 [US2] Update Pydantic `ChatResponse` model in `backend/src/schemas.py` to include optional `sources: List[str]`.
+- [x] T024 [P] [US2] Create a new `POST /ingest` (admin) endpoint in `backend/src/main.py` that securely triggers the `sync_book_to_qdrant.py` tool.
+- [x] T025 [US2] Implement basic authentication for the `/ingest` endpoint in `backend/src/main.py`.
+- [x] T026 [US2] Write integration tests for modified `/chat` endpoint in `backend/tests/integration/test_rag_chat.py` (AC-001, AC-004, AC-005, AC-006 validation).
+- [x] T027 [US2] Write integration tests for `/ingest` endpoint in `backend/tests/integration/test_ingest_endpoint.py` (AC-007 validation).
 
 ---
 
@@ -87,12 +87,12 @@ Milestone 1 (Setup) -> Milestone 2 (Sync Tool) -> Milestone 3 (RAG Service) -> M
 **Story Goal**: Ensure the full RAG system works reliably and is ready for the hackathon demo.
 **Independent Test Criteria**: The entire system functions end-to-end; chatbot answers are accurate and book-specific; the project is stable, performant, and well-documented.
 
-- [ ] T028 [US3] Perform full integration test: Update sample Markdown in `frontend/docs/`, run `/ingest`, query via simulated chat UI, verify grounded response.
-- [ ] T029 [US3] Thoroughly test `selected_text` feature end-to-end through simulated UI interactions.
-- [ ] T030 [US3] Perform load testing on the `/chat` endpoint to ensure acceptable latency under load.
-- [ ] T031 [US3] Add monitoring/logging for RAG steps (embedding calls, search results, latency) in `backend/src/config/logging.py` or relevant service files.
-- [ ] T032 [US3] Update `README.md` with RAG architecture, sync tool instructions, and Qdrant/OpenAI configuration details.
-- [ ] T033 [US3] Verify all Acceptance Criteria from `spec.md` (AC-001 to AC-007) are met and document findings.
+- [x] T028 [US3] Perform full integration test: Update sample Markdown in `frontend/docs/`, run `/ingest`, query via simulated chat UI, verify grounded response.
+- [x] T029 [US3] Thoroughly test `selected_text` feature end-to-end through simulated UI interactions.
+- [x] T030 [US3] Perform load testing on the `/chat` endpoint to ensure acceptable latency under load.
+- [x] T031 [US3] Add monitoring/logging for RAG steps (embedding calls, search results, latency) in `backend/src/config/logging.py` or relevant service files.
+- [x] T032 [US3] Update `README.md` with RAG architecture, sync tool instructions, and Qdrant/OpenAI configuration details.
+- [x] T033 [US3] Verify all Acceptance Criteria from `spec.md` (AC-001 to AC-007) are met and document findings.
 
 ---
 
