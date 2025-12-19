@@ -23,6 +23,9 @@ const config: Config = {
   scripts: [
     'https://cdn.platform.openai.com/deployments/chatkit/chatkit.js',
   ],
+  stylesheets: [
+    'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap',
+  ],
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -145,8 +148,8 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} Physical AI & Humanoid Robotics Textbook. Built with Docusaurus.`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: prismThemes.vsLight,
+      darkTheme: prismThemes.vsDark,
     },
   } satisfies Preset.ThemeConfig,
 };
