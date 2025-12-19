@@ -181,7 +181,7 @@ class QdrantIngestor:
             url=qdrant_url or os.getenv("QDRANT_URL"),
             api_key=qdrant_api_key or os.getenv("QDRANT_API_KEY"),
         )
-        self.vector_size = 768 # For 'gemini-2.5-flash' text embeddings
+        self.vector_size = 768 # For 'models/text-embedding-004' text embeddings
         self.distance_metric = models.Distance.COSINE
 
     async def ensure_collection_exists(self, force_recreate: bool = False):
@@ -204,6 +204,15 @@ class QdrantIngestor:
                 ),
             )
             print(f"Collection '{self.collection_name}' created.")
+            # Verify collection configuration
+            collection_info = self.client.get_collection(collection_name=self.collection_name).config
+            if collection_info.params.vectors.size != self.vector_size:
+                logger.error(f"Error: Collection '{self.collection_name}' created with incorrect vector size! Expected {self.vector_size}, got {collection_info.params.vectors.size}")
+                # Optionally, raise an exception or attempt to fix
+                raise ValueError("Collection created with incorrect vector size.")
+            else:
+                logger.info(f"Collection '{self.collection_name}' verified with correct vector size: {self.vector_size}.")
+
         else:
             print(f"Collection '{self.collection_name}' already exists.")
 

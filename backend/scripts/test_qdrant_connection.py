@@ -15,36 +15,34 @@ async def test_qdrant_connection():
         api_key=QDRANT_API_KEY,
     )
 
-    collection_name = "test_collection_gemini_cli"
+    collection_name = "physical_ai_textbook"
 
     print(f"Attempting to connect to Qdrant at {QDRANT_URL}...")
     try:
-        # Check if collection exists, delete if it does
-        if client.collection_exists(collection_name=collection_name):
-            print(f"Collection '{collection_name}' already exists, deleting...")
-            client.delete_collection(collection_name=collection_name)
-            print(f"Collection '{collection_name}' deleted.")
+        if not client.collection_exists(collection_name=collection_name):
+            print(f"Collection '{collection_name}' does not exist. Please run the sync tool first.")
+            return
 
-        # Create a dummy collection
-        print(f"Creating collection '{collection_name}'...")
-        client.create_collection(
+        print(f"Fetching 1 sample point from collection '{collection_name}'...")
+        # Fetch a sample point
+        search_result = client.scroll(
             collection_name=collection_name,
-            vectors_config=models.VectorParams(size=768, distance=models.Distance.COSINE),
+            limit=1,
+            with_payload=True,
+            with_vectors=True
         )
-        print(f"Collection '{collection_name}' created successfully.")
 
-        # List collections to verify
-        collections = client.get_collections()
-        collection_names = [c.name for c in collections.collections]
-        print(f"Collections found: {collection_names}")
-        assert collection_name in collection_names, f"Collection '{collection_name}' not found in list."
+        if search_result and search_result[0]:
+            sample_point = search_result[0][0] # scroll returns (list_of_points, next_page_offset)
+            print("\nSuccessfully fetched a sample point:")
+            print(f"  ID: {sample_point.id}")
+            print(f"  Payload: {sample_point.payload}")
+            print(f"  Vector size: {len(sample_point.vector) if sample_point.vector else 'N/A'}")
+            print(f"  First 5 vector dimensions: {sample_point.vector[:5] if sample_point.vector else 'N/A'}")
+            print("\nQdrant connection and sample point verification successful!")
+        else:
+            print(f"No points found in collection '{collection_name}'. Please ensure data has been synced.")
 
-        # Delete the dummy collection
-        print(f"Deleting collection '{collection_name}'...")
-        client.delete_collection(collection_name=collection_name)
-        print(f"Collection '{collection_name}' deleted successfully.")
-
-        print("\nQdrant connection and basic operations successful!")
     except Exception as e:
         print(f"\nError connecting to Qdrant or performing operations: {e}")
 
