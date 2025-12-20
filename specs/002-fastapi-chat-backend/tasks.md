@@ -40,10 +40,10 @@ description: "Task list for the Minimalistic FastAPI Backend for Chat feature im
 - [X] T009 Define `ChatSession` SQLAlchemy Model (`src/models.py`)
 - [X] T010 Define `Message` SQLAlchemy Model (`src/models.py`)
 - [X] T011 Configure Alembic (`alembic/`)
-- [ ] T012 Generate initial migration script reflecting `ChatSession` and `Message` models (`alembic/versions/`)
-- [ ] T013 Implement Async Database Engine and Session Factory (`src/database.py`)
-- [ ] T014 Develop Database Session Dependency Injection (`src/database.py`)
-- [ ] T015 Implement Repository Functions for `ChatSession`: `find_by_id`, `create`, and `Message`: `create`, `get_last_n_messages_for_session` (`src/repositories/chat_repository.py`)
+- [X] T012 Generate initial migration script reflecting `ChatSession` and `Message` models (`alembic/versions/`)
+- [X] T013 Implement Async Database Engine and Session Factory (`src/database.py`)
+- [X] T014 Develop Database Session Dependency Injection (`src/database.py`)
+- [X] T015 Implement Repository Functions for `ChatSession`: `find_by_id`, `create`, and `Message`: `create`, `get_last_n_messages_for_session` (`src/repositories/chat_repository.py`)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -58,18 +58,18 @@ description: "Task list for the Minimalistic FastAPI Backend for Chat feature im
 ### Tests for User Story 1
 
 - [X] T016 [P] [US1] Unit test Pydantic `ChatRequest`, `ChatResponse`, `HealthResponse` (`tests/unit/test_schemas.py`)
-- [ ] T017 [P] [US1] Unit test SQLAlchemy Models (`ChatSession`, `Message`) (`tests/unit/test_models.py`)
-- [ ] T018 [US1] Integration test new chat session flow (`tests/integration/test_chat_new_session.py`)
+- [X] T017 [P] [US1] Unit test SQLAlchemy Models (`ChatSession`, `Message`) (`tests/unit/test_models.py`)
+- [X] T018 [US1] Integration test new chat session flow (`tests/integration/test_chat_new_session.py`)
 
 ### Implementation for User Story 1
 
 - [X] T019 [P] [US1] Define Pydantic Models: `ChatRequest`, `ChatResponse`, `HealthResponse` (`src/schemas.py`)
-- [ ] T020 [P] [US1] Implement `session_manager` logic for `find_or_create_session` (`src/services/session_manager.py`)
-- [ ] T021 [P] [US1] Implement `message_repository` to save user message (`src/services/message_repository.py`)
-- [ ] T022 [P] [US1] Construct system prompt for AI persona (`src/services/openai_client.py`)
-- [ ] T023 [P] [US1] Implement `openai_client` to call OpenAI Chat Completions API (`src/services/openai_client.py`)
-- [ ] T024 [US1] Implement `POST /chat` endpoint logic for new sessions (no `session_id` provided) (`src/main.py`)
-- [ ] T025 [US1] Implement `message_repository` to save AI response (`src/services/message_repository.py`)
+- [X] T020 [P] [US1] Implement `session_manager` logic for `find_or_create_session` (`src/services/session_manager.py`)
+- [X] T021 [P] [US1] Implement `message_repository` to save user message (`src/services/message_repository.py`)
+- [X] T022 [P] [US1] Construct system prompt for AI persona (`src/services/openai_client.py`)
+- [X] T023 [P] [US1] Implement `openai_client` to call OpenAI Chat Completions API (`src/services/openai_client.py`)
+- [X] T024 [US1] Implement `POST /chat` endpoint logic for new sessions (no `session_id` provided) (`src/main.py`)
+- [X] T025 [US1] Implement `message_repository` to save AI response (`src/services/message_repository.py`)
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 

@@ -9,7 +9,7 @@ import os
 from typing import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
-from sqlalchemy.orm import declarative_base
+from src.models import Base
 from sqlalchemy.ext.asyncio import AsyncEngine # Added this import
 
 # Define global variables to hold the engine and sessionmaker instances.
@@ -54,7 +54,7 @@ def get_session_maker() -> async_sessionmaker[AsyncSession]:
     return _async_session_maker
 
 
-Base = declarative_base() # Moved this to after engine/sessionmaker setup for logical flow, although it can be anywhere
+
 
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
