@@ -83,13 +83,13 @@ description: "Task list for the Minimalistic FastAPI Backend for Chat feature im
 
 ### Tests for User Story 2
 
-- [ ] T026 [US2] Integration test existing chat session flow with context (`tests/integration/test_chat_existing_session.py`)
+- [X] T026 [US2] Integration test existing chat session flow with context (`tests/integration/test_chat_existing_session.py`)
 
 ### Implementation for User Story 2
 
-- [ ] T027 [US2] Enhance `session_manager` logic to find existing session (`src/services/session_manager.py`)
-- [ ] T028 [US2] Implement `message_repository` to retrieve last 10 messages for context (`src/services/message_repository.py`)
-- [ ] T029 [US2] Update `POST /chat` endpoint to send conversation history context to OpenAI (`src/main.py`)
+- [X] T027 [US2] Enhance `session_manager` logic to find existing session (`src/services/session_manager.py`)
+- [X] T028 [US2] Implement `message_repository` to retrieve last 10 messages for context (`src/services/message_repository.py`)
+- [X] T029 [US2] Update `POST /chat` endpoint to send conversation history context to OpenAI (`src/main.py`)
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -103,11 +103,11 @@ description: "Task list for the Minimalistic FastAPI Backend for Chat feature im
 
 ### Tests for User Story 3
 
-- [ ] T030 [US3] Integration test `selected_text` functionality (`tests/integration/test_chat_selected_text.py`)
+- [X] T030 [US3] Integration test `selected_text` functionality (`tests/integration/test_chat_selected_text.py`)
 
 ### Implementation for User Story 3
 
-- [ ] T031 [US3] Modify `openai_client` and `POST /chat` endpoint to inject `selected_text` into prompt context (`src/services/openai_client.py`, `src/main.py`)
+- [X] T031 [US3] Modify `openai_client` and `POST /chat` endpoint to inject `selected_text` into prompt context (`src/services/openai_client.py`, `src/main.py`)
 
 **Checkpoint**: All user stories should now be independently functional
 
