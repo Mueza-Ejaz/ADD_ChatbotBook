@@ -28,7 +28,7 @@ class SessionManager:
             ChatSession: The found or newly created chat session.
         """
         if session_id:
-            session = await self.chat_repository.find_by_id(session_id)
+            session = await self.chat_repository.find_session_by_id(session_id)
             if session:
                 return session
         

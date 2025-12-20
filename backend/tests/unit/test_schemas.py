@@ -7,10 +7,10 @@ from src.schemas import ChatRequest, ChatResponse, HealthResponse
 
 def test_chat_request_valid():
     # Test valid ChatRequest
-    request = ChatRequest(message="Hello", session_id=uuid4(), selected_text="Some text")
+    request = ChatRequest(message="Hello", session_id=uuid4(), selected_text="Some longer text")
     assert request.message == "Hello"
     assert isinstance(request.session_id, UUID)
-    assert request.selected_text == "Some text"
+    assert request.selected_text == "Some longer text"
 
 def test_chat_request_no_session_id_no_selected_text():
     # Test ChatRequest with no optional fields

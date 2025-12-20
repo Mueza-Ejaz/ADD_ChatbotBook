@@ -8,7 +8,7 @@ from src.models import ChatSession, Message
 
 
 @pytest.mark.asyncio
-async def test_existing_chat_session_continues_conversation(session):
+async def test_existing_chat_session_continues_conversation(session, use_real_dependencies):
     # 1. Create an existing chat session with some messages
     existing_session = ChatSession()
     session.add(existing_session)
