@@ -104,7 +104,7 @@ async def chat_endpoint(
 
         ai_input = request.message
         if request.selected_text:
-            ai_input = f"Based on this text: {request.selected_text}\n{request.message}"
+            ai_input = f"Context: {request.selected_text}\nQuery: {request.message}"
 
         system_prompt = gemini_client.construct_system_prompt()
         ai_response = await gemini_client.generate_response(
