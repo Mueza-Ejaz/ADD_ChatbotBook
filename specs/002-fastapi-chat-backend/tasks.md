@@ -117,15 +117,15 @@ description: "Task list for the Minimalistic FastAPI Backend for Chat feature im
 
 **Purpose**: Harden the application and prepare it for Phase 3 integration.
 
-- [ ] T032 Implement Comprehensive Error Handling for Pydantic, OpenAI, Database, and generic errors (`src/exceptions.py`, `src/main.py`)
-- [ ] T033 Integrate Structured Logging (`Loguru`) as defined in `research.md` (`src/main.py`, `src/config/logging.py` or similar)
-- [ ] T034 Review and enhance Pydantic models for stricter input validation (`src/schemas.py`)
-- [ ] T035 Develop Unit Tests for Core Logic Components (`session_manager`, `openai_client`) (`tests/unit/`)
-- [ ] T036 Develop Integration Tests for Error Scenarios (e.g., OpenAI API failure, DB connection loss) (`tests/integration/`)
-- [ ] T037 Add Type Hints and Docstrings to all public functions, classes, and complex logic (across codebase)
-- [ ] T038 Configure and Integrate `ruff` for linting and `black` for formatting (`pyproject.toml`)
-- [ ] T039 Update `README.md` with setup instructions, running the app locally, and basic API usage (`README.md`)
-- [ ] T040 Create a simple `Dockerfile` and environment validation script (`Dockerfile`, `scripts/validate_env.py` or similar)
+- [X] T032 Implement Comprehensive Error Handling for Pydantic, OpenAI, Database, and generic errors (`src/exceptions.py`, `src/main.py`)
+- [X] T033 Integrate Structured Logging (`Loguru`) as defined in `research.md` (`src/main.py`, `src/config/logging.py` or similar)
+- [X] T034 Review and enhance Pydantic models for stricter input validation (`src/schemas.py`)
+- [X] T035 Develop Unit Tests for Core Logic Components (`session_manager`, `openai_client`) (`tests/unit/`)
+- [X] T036 Develop Integration Tests for Error Scenarios (e.g., OpenAI API failure, DB connection loss) (`tests/integration/`)
+- [X] T037 Add Type Hints and Docstrings to all public functions, classes, and complex logic (across codebase)
+- [X] T038 Configure and Integrate `ruff` for linting and `black` for formatting (`pyproject.toml`)
+- [X] T039 Update `README.md` with setup instructions, running the app locally, and basic API usage (`README.md`)
+- [X] T040 Create a simple `Dockerfile` and environment validation script (`Dockerfile`, `scripts/validate_env.py` or similar)
 
 ---
 
