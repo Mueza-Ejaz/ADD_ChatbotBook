@@ -11,9 +11,9 @@ export const MessageList: React.FC = () => {
   const { messages, isLoading, error } = context;
 
   return (
-    <div className="message-list">
+    <>
       {messages.map((message) => (
-        <div key={message.id} className={`message ${message.sender}`}>
+        <div key={message.id} className={`message-bubble ${message.sender}`}>
           <p>{message.content}</p>
           {message.isContextuallyDriven && <span className="context-indicator"> (Contextual)</span>}
           <span className="timestamp">{new Date(message.timestamp).toLocaleTimeString()}</span>
@@ -21,6 +21,7 @@ export const MessageList: React.FC = () => {
       ))}
       {isLoading && <div className="typing-indicator">AI is typing...</div>}
       {error && <div className="chat-error">{error}</div>}
-    </div>
+    </>
   );
 };
+
