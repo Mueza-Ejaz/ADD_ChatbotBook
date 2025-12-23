@@ -73,3 +73,5 @@ class GeminiClient:
             return response.text
         except GoogleAPIError as e:
             raise GeminiAPIException(detail=str(e))
+
+            
