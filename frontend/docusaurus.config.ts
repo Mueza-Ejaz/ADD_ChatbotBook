@@ -25,11 +25,12 @@ const config: Config = {
   ],
   stylesheets: [
     'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap',
+    '/Bookplus_Chatbot/css/chatbot.css', // Add the custom chatbot CSS
   ],
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: '<YOUR_GITHUB_USERNAME_OR_ORG>', // Usually your GitHub org/user name.
+  organizationName: 'Mueza Ejaz', // Usually your GitHub org/user name.
   projectName: 'Bookplus_Chatbot', // Usually your repo name.
 
   onBrokenLinks: 'ignore',
@@ -96,7 +97,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/Mueza-Ejaz',
           label: 'GitHub',
           position: 'right',
         },
@@ -122,13 +123,10 @@ const config: Config = {
               href: 'https://stackoverflow.com/questions/tagged/docusaurus',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              label: 'LinkedIn',
+              href: 'https://www.linkedin.com/in/mueza-ejaz086',
             },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
+            { label: 'X', href: 'https://x.com/' }
           ],
         },
         {
@@ -140,12 +138,12 @@ const config: Config = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/Mueza-Ejaz',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Physical AI & Humanoid Robotics Textbook. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Physical AI & Humanoid Robotics Textbook. Built with Mueza Ejaz.`,
     },
     prism: {
       theme: prismThemes.vsLight,
