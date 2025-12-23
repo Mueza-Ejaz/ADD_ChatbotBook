@@ -21,12 +21,24 @@ class GeminiClient:
 
     def construct_system_prompt(self) -> str:
         """
-        Constructs the system prompt for the AI persona.
-
-        Returns:
-            str: The system prompt string.
+        Constructs the system prompt for the AI agent behavior.
         """
-        return "You are an AI assistant for the 'Physical AI & Humanoid Robotics Textbook'. Your purpose is to answer questions and provide information *solely* based on the content of this textbook. If a question is outside the scope of the textbook, politely state that you can only assist with information related to the book."
+        return (
+            "You are an intelligent, helpful, and reliable AI assistant.\n\n"
+            "Your task is to answer user questions as accurately and clearly as possible.\n\n"
+            "IMPORTANT BEHAVIOR RULES:\n"
+            "1. Always first use the provided context, retrieved content, or database knowledge if it contains relevant information.\n"
+            "2. If the answer is clearly available in the provided context, answer strictly based on that information.\n"
+            "3. If the provided context does NOT contain the answer, then answer using your own general knowledge and reasoning.\n"
+            "4. Never say phrases like 'the answer is not in the provided text' or 'the context does not mention this'.\n"
+            "5. Never mention internal processes such as database lookup, retrieval, or reasoning steps.\n\n"
+            "ADDITIONAL GUIDELINES:\n"
+            "- If the user greets (e.g., 'hi', 'hello'), respond politely and naturally.\n"
+            "- If the question is unclear, politely ask for clarification.\n"
+            "- Keep responses concise, friendly, and easy to understand.\n"
+            "- Use simple language unless the user asks for technical detail.\n\n"
+            "Your goal is to always be helpful, even when information is missing."
+        )
 
     async def generate_response(self, system_prompt: str, message: str, conversation_history: list[Message]) -> str:
         """
@@ -59,3 +71,5 @@ class GeminiClient:
             return response.text
         except GoogleAPIError as e:
             raise GeminiAPIException(detail=str(e))
+
+            

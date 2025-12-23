@@ -40,10 +40,10 @@ description: "Task list for the Minimalistic FastAPI Backend for Chat feature im
 - [X] T009 Define `ChatSession` SQLAlchemy Model (`src/models.py`)
 - [X] T010 Define `Message` SQLAlchemy Model (`src/models.py`)
 - [X] T011 Configure Alembic (`alembic/`)
-- [ ] T012 Generate initial migration script reflecting `ChatSession` and `Message` models (`alembic/versions/`)
-- [ ] T013 Implement Async Database Engine and Session Factory (`src/database.py`)
-- [ ] T014 Develop Database Session Dependency Injection (`src/database.py`)
-- [ ] T015 Implement Repository Functions for `ChatSession`: `find_by_id`, `create`, and `Message`: `create`, `get_last_n_messages_for_session` (`src/repositories/chat_repository.py`)
+- [X] T012 Generate initial migration script reflecting `ChatSession` and `Message` models (`alembic/versions/`)
+- [X] T013 Implement Async Database Engine and Session Factory (`src/database.py`)
+- [X] T014 Develop Database Session Dependency Injection (`src/database.py`)
+- [X] T015 Implement Repository Functions for `ChatSession`: `find_by_id`, `create`, and `Message`: `create`, `get_last_n_messages_for_session` (`src/repositories/chat_repository.py`)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -58,18 +58,18 @@ description: "Task list for the Minimalistic FastAPI Backend for Chat feature im
 ### Tests for User Story 1
 
 - [X] T016 [P] [US1] Unit test Pydantic `ChatRequest`, `ChatResponse`, `HealthResponse` (`tests/unit/test_schemas.py`)
-- [ ] T017 [P] [US1] Unit test SQLAlchemy Models (`ChatSession`, `Message`) (`tests/unit/test_models.py`)
-- [ ] T018 [US1] Integration test new chat session flow (`tests/integration/test_chat_new_session.py`)
+- [X] T017 [P] [US1] Unit test SQLAlchemy Models (`ChatSession`, `Message`) (`tests/unit/test_models.py`)
+- [X] T018 [US1] Integration test new chat session flow (`tests/integration/test_chat_new_session.py`)
 
 ### Implementation for User Story 1
 
 - [X] T019 [P] [US1] Define Pydantic Models: `ChatRequest`, `ChatResponse`, `HealthResponse` (`src/schemas.py`)
-- [ ] T020 [P] [US1] Implement `session_manager` logic for `find_or_create_session` (`src/services/session_manager.py`)
-- [ ] T021 [P] [US1] Implement `message_repository` to save user message (`src/services/message_repository.py`)
-- [ ] T022 [P] [US1] Construct system prompt for AI persona (`src/services/openai_client.py`)
-- [ ] T023 [P] [US1] Implement `openai_client` to call OpenAI Chat Completions API (`src/services/openai_client.py`)
-- [ ] T024 [US1] Implement `POST /chat` endpoint logic for new sessions (no `session_id` provided) (`src/main.py`)
-- [ ] T025 [US1] Implement `message_repository` to save AI response (`src/services/message_repository.py`)
+- [X] T020 [P] [US1] Implement `session_manager` logic for `find_or_create_session` (`src/services/session_manager.py`)
+- [X] T021 [P] [US1] Implement `message_repository` to save user message (`src/services/message_repository.py`)
+- [X] T022 [P] [US1] Construct system prompt for AI persona (`src/services/openai_client.py`)
+- [X] T023 [P] [US1] Implement `openai_client` to call OpenAI Chat Completions API (`src/services/openai_client.py`)
+- [X] T024 [US1] Implement `POST /chat` endpoint logic for new sessions (no `session_id` provided) (`src/main.py`)
+- [X] T025 [US1] Implement `message_repository` to save AI response (`src/services/message_repository.py`)
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -83,13 +83,13 @@ description: "Task list for the Minimalistic FastAPI Backend for Chat feature im
 
 ### Tests for User Story 2
 
-- [ ] T026 [US2] Integration test existing chat session flow with context (`tests/integration/test_chat_existing_session.py`)
+- [X] T026 [US2] Integration test existing chat session flow with context (`tests/integration/test_chat_existing_session.py`)
 
 ### Implementation for User Story 2
 
-- [ ] T027 [US2] Enhance `session_manager` logic to find existing session (`src/services/session_manager.py`)
-- [ ] T028 [US2] Implement `message_repository` to retrieve last 10 messages for context (`src/services/message_repository.py`)
-- [ ] T029 [US2] Update `POST /chat` endpoint to send conversation history context to OpenAI (`src/main.py`)
+- [X] T027 [US2] Enhance `session_manager` logic to find existing session (`src/services/session_manager.py`)
+- [X] T028 [US2] Implement `message_repository` to retrieve last 10 messages for context (`src/services/message_repository.py`)
+- [X] T029 [US2] Update `POST /chat` endpoint to send conversation history context to OpenAI (`src/main.py`)
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -103,11 +103,11 @@ description: "Task list for the Minimalistic FastAPI Backend for Chat feature im
 
 ### Tests for User Story 3
 
-- [ ] T030 [US3] Integration test `selected_text` functionality (`tests/integration/test_chat_selected_text.py`)
+- [X] T030 [US3] Integration test `selected_text` functionality (`tests/integration/test_chat_selected_text.py`)
 
 ### Implementation for User Story 3
 
-- [ ] T031 [US3] Modify `openai_client` and `POST /chat` endpoint to inject `selected_text` into prompt context (`src/services/openai_client.py`, `src/main.py`)
+- [X] T031 [US3] Modify `openai_client` and `POST /chat` endpoint to inject `selected_text` into prompt context (`src/services/openai_client.py`, `src/main.py`)
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -117,15 +117,15 @@ description: "Task list for the Minimalistic FastAPI Backend for Chat feature im
 
 **Purpose**: Harden the application and prepare it for Phase 3 integration.
 
-- [ ] T032 Implement Comprehensive Error Handling for Pydantic, OpenAI, Database, and generic errors (`src/exceptions.py`, `src/main.py`)
-- [ ] T033 Integrate Structured Logging (`Loguru`) as defined in `research.md` (`src/main.py`, `src/config/logging.py` or similar)
-- [ ] T034 Review and enhance Pydantic models for stricter input validation (`src/schemas.py`)
-- [ ] T035 Develop Unit Tests for Core Logic Components (`session_manager`, `openai_client`) (`tests/unit/`)
-- [ ] T036 Develop Integration Tests for Error Scenarios (e.g., OpenAI API failure, DB connection loss) (`tests/integration/`)
-- [ ] T037 Add Type Hints and Docstrings to all public functions, classes, and complex logic (across codebase)
-- [ ] T038 Configure and Integrate `ruff` for linting and `black` for formatting (`pyproject.toml`)
-- [ ] T039 Update `README.md` with setup instructions, running the app locally, and basic API usage (`README.md`)
-- [ ] T040 Create a simple `Dockerfile` and environment validation script (`Dockerfile`, `scripts/validate_env.py` or similar)
+- [X] T032 Implement Comprehensive Error Handling for Pydantic, OpenAI, Database, and generic errors (`src/exceptions.py`, `src/main.py`)
+- [X] T033 Integrate Structured Logging (`Loguru`) as defined in `research.md` (`src/main.py`, `src/config/logging.py` or similar)
+- [X] T034 Review and enhance Pydantic models for stricter input validation (`src/schemas.py`)
+- [X] T035 Develop Unit Tests for Core Logic Components (`session_manager`, `openai_client`) (`tests/unit/`)
+- [X] T036 Develop Integration Tests for Error Scenarios (e.g., OpenAI API failure, DB connection loss) (`tests/integration/`)
+- [X] T037 Add Type Hints and Docstrings to all public functions, classes, and complex logic (across codebase)
+- [X] T038 Configure and Integrate `ruff` for linting and `black` for formatting (`pyproject.toml`)
+- [X] T039 Update `README.md` with setup instructions, running the app locally, and basic API usage (`README.md`)
+- [X] T040 Create a simple `Dockerfile` and environment validation script (`Dockerfile`, `scripts/validate_env.py` or similar)
 
 ---
 

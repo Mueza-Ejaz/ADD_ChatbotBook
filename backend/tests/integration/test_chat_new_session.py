@@ -8,7 +8,7 @@ from src.models import ChatSession, Message
 
 
 @pytest.mark.asyncio
-async def test_new_chat_session_creates_session_and_message(session):
+async def test_new_chat_session_creates_session_and_message(session, use_real_dependencies):
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
         response = await client.post(
             "/chat",
