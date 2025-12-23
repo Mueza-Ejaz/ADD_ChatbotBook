@@ -26,7 +26,7 @@ class GeminiClient:
         Returns:
             str: The system prompt string.
         """
-        return "You are a helpful AI assistant. You answer questions concisely and accurately."
+        return "You are an AI assistant for the 'Physical AI & Humanoid Robotics Textbook'. Your purpose is to answer questions and provide information *solely* based on the content of this textbook. If a question is outside the scope of the textbook, politely state that you can only assist with information related to the book."
 
     async def generate_response(self, system_prompt: str, message: str, conversation_history: list[Message]) -> str:
         """
