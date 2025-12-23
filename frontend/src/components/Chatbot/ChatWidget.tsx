@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ChatKit, useChatKit } from '@openai/chatkit-react';
 import { ChatBotProvider } from './ChatBotProvider';
-import '../css/chatbot.css'; // Import the new chatbot styles
+import '../../css/chatbot.css'; // Import the new chatbot styles
 import { MessageList } from './MessageList';
 import { MessageInput } from './MessageInput';
 
