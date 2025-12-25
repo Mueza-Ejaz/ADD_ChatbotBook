@@ -1,0 +1,331 @@
+/* frontend/src/components/CustomChatbot/CustomChatbot.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --chatbot-primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --chatbot-header-bg: rgba(255, 255, 255, 0.05); /* Lighter glassmorphism header */
+  --chatbot-chat-area-bg: #f5f5f5;
+  --chatbot-user-message-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --chatbot-bot-message-bg: rgba(255, 255, 255, 0.1);
+  --chatbot-bot-message-border: rgba(255, 255, 255, 0.15);
+  --chatbot-text-color-primary: #333;
+  --chatbot-text-color-secondary: #6c757d;
+  --chatbot-border-color: rgba(255, 255, 255, 0.1);
+  --chatbot-shadow-light: 0 4px 15px rgba(102, 126, 234, 0.4);
+  --chatbot-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --chatbot-shadow-deep: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.chatbotContainer {
+  position: fixed;
+  bottom: 90px; /* Adjusted position to be above the toggle button */
+  right: 20px;
+  width: 350px;
+  height: 500px;
+  background: var(--chatbot-header-bg); /* Use a lighter background for initial container */
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--chatbot-border-color);
+  border-radius: 16px; /* Rounded corners as per spec */
+  box-shadow: var(--chatbot-shadow-deep), inset 0 1px 0 var(--chatbot-border-color); /* Multi-layer shadow */
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  color: var(--chatbot-text-color-primary);
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.chatbotToggleButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--chatbot-primary-gradient); /* Changed to gradient background */
+  color: white;
+  border: none;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3); /* Enhanced shadow */
+  font-size: 1em; /* Adjusted font size for text */
+  cursor: pointer;
+  z-index: 1001; /* Higher z-index than the chatbot itself */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+}
+
+.chatbotToggleButton:hover {
+  transform: translateY(-5px) scale(1.1); /* More pronounced lift and scale on hover */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4); /* Deeper shadow on hover */
+}
+
+.chatbotToggleButton:active {
+  transform: translateY(0) scale(1); /* Return to normal on click */
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2); /* Reduced shadow on active */
+}
+
+.chatbotHeader {
+  background: var(--chatbot-header-bg); /* Glassmorphism header with blur */
+  backdrop-filter: blur(5px);
+  padding: 10px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid var(--chatbot-border-color);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Subtle shadow for header */
+}
+
+.chatbotHeader h3 {
+  margin: 0;
+  font-size: 1.5rem; /* Larger, more elegant title */
+  font-weight: 600;
+  color: white; /* White text for contrast on dark header */
+  /* Animated title text (fade-in) - will handle in JS/React later */
+}
+
+.chatMainContainer {
+  flex-grow: 1;
+  background-color: var(--chatbot-chat-area-bg); /* Light gray background */
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  /* Custom scrollbar with gradient track - will handle later */
+}
+
+.welcomeBanner {
+  text-align: center;
+  padding: 20px; /* More padding for card style */
+  margin: 10px;
+  background: rgba(255, 255, 255, 0.05); /* Card background */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+  border-radius: 12px;
+  color: var(--chatbot-text-color-secondary);
+  font-size: 0.9rem; /* Smaller font size */
+  line-height: 1.6;
+  font-style: italic; /* Italic introductory paragraph */
+  box-shadow: var(--chatbot-shadow-medium); /* Soft shadow */
+  animation: messageAppear 0.5s ease-out;
+}
+
+.welcomeBanner h4 {
+  font-size: 1.5rem; /* Title size */
+  font-weight: 600;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient text */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.messageContainer {
+  display: flex;
+  align-items: flex-start;
+  margin: 8px 0; /* Adjusted margin */
+  max-width: 80%;
+  word-break: break-word;
+  animation: messageAppear 0.3s ease-out; /* Entry animation */
+  transform-origin: bottom; /* For scale animation */
+}
+
+@keyframes messageAppear {
+  0% { opacity: 0; transform: translateY(10px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.userMessage {
+  margin-left: auto;
+  /* Removed flex-direction: row-reverse; to align text without avatar */
+}
+
+.botMessage {
+  margin-right: auto;
+  flex-direction: row; /* Align bot messages to left */
+}
+
+.messageContent {
+  padding: 10px 15px;
+  border-radius: 18px; /* Default border radius */
+  color: white; /* Default for user */
+  box-shadow: var(--chatbot-shadow-light); /* Floating effect */
+  font-size: 0.95rem; /* User message font size */
+  font-weight: 500; /* Medium weight */
+}
+
+.userMessage .messageContent {
+  background: var(--chatbot-user-message-bg); /* User message gradient */
+  border-bottom-right-radius: 4px; /* Specific border radius for user */
+}
+
+.botMessage .messageContent {
+  background: var(--chatbot-bot-message-bg); /* Bot message glassmorphism */
+  border: 1px solid var(--chatbot-bot-message-border);
+  color: var(--chatbot-text-color-primary);
+  border-bottom-left-radius: 4px; /* Specific border radius for bot */
+  box-shadow: var(--chatbot-shadow-medium); /* Shadow for bot messages */
+  font-size: 0.92rem; /* Bot message font size */
+  font-weight: 400; /* Regular weight */
+}
+
+.messageAvatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #007AFF; /* User avatar background (will be hidden now) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Soft shadow for avatar */
+  flex-shrink: 0;
+  margin: 0 5px;
+}
+
+.botMessage .messageAvatar {
+  background-color: #6c757d; /* Bot avatar background */
+}
+
+/* User messages with no avatar should align text to right */
+.userMessage {
+  justify-content: flex-end;
+}
+
+.messageTimestamp {
+  font-size: 0.75rem; /* Timestamp font size */
+  color: var(--chatbot-text-color-secondary);
+  margin-top: 3px;
+}
+
+.userMessage .messageTimestamp {
+  text-align: right;
+  margin-right: 0; /* No avatar, no extra margin */
+}
+
+.botMessage .messageTimestamp {
+  text-align: left;
+  margin-left: 5px; /* Adjust for avatar */
+}
+
+.inputSection {
+  padding: 10px;
+  border-top: 1px solid var(--chatbot-border-color);
+  display: flex;
+  align-items: center;
+  background: var(--chatbot-header-bg); /* Glassmorphism input container */
+  backdrop-filter: blur(5px);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.inputField {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #999; /* Darker, more prominent border */
+  border-radius: 8px; /* Rounded input field */
+  margin-right: 10px;
+  background: rgba(255, 255, 255, 0.8); /* Even more opaque background for input field */
+  color: var(--chatbot-text-color-primary);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); /* More prominent inner shadow */
+  transition: all 0.3s ease;
+}
+
+.inputField::placeholder { /* Placeholder style */
+  color: #333; /* Even darker color for placeholder text */
+  opacity: 1; /* Ensure full opacity */
+}
+
+.inputField:focus {
+  outline: none;
+  border-color: #007AFF; /* Focus glow */
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1), 0 0 0 3px rgba(0, 122, 255, 0.2);
+}
+
+.sendButton {
+  background: var(--chatbot-user-message-bg); /* Send button gradient */
+  color: white;
+  border: none;
+  border-radius: 8px; /* Rounded button */
+  padding: 10px 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: var(--chatbot-shadow-light); /* Shadow for button */
+}
+
+.sendButton:hover {
+  transform: translateY(-2px); /* Hover elevation */
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.sendButton:active {
+  transform: translateY(0);
+  box-shadow: var(--chatbot-shadow-light);
+}
+
+.sendButton:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.typingIndicator {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.typingIndicator span {
+  width: 8px;
+  height: 8px;
+  margin: 0 2px;
+  background-color: #6c757d;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.typingIndicator span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.typingIndicator span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+/* Custom Scrollbar - Webkit browsers */
+.chatMainContainer::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent; /* Make scrollbar track transparent */
+}
+
+.chatMainContainer::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%); /* Gradient thumb */
+  border-radius: 10px;
+  border: 2px solid transparent; /* Transparent border for better gradient look */
+  background-clip: content-box; /* Clip background to padding box */
+}
+
+.chatMainContainer::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.05); /* Subtle glassmorphism track */
+  border-radius: 10px;
+}

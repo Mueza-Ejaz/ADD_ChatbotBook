@@ -12,19 +12,21 @@ const config: Config = {
   },
 
   url: 'https://example.com',
-  baseUrl: '/', // Resolved: Using main's baseUrl
+  // Set the /<baseUrl>/ pathname under which your site is served
+  // For GitHub pages deployment, it is often '/<projectName>/'
+  baseUrl: '/Bookplus_Chatbot/',
 
   scripts: [
     'https://cdn.platform.openai.com/deployments/chatkit/chatkit.js',
   ],
   stylesheets: [
     'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', // Resolved: Keep FontAwesome from 004-robotics-ui-theme
-    '/Bookplus_Chatbot/css/chatbot.css', // Resolved: Keep chatbot CSS from main
   ],
 
-  organizationName: 'Mueza Ejaz', // Resolved: Using main's organizationName
-  projectName: 'Bookplus_Chatbot', // Resolved: Using main's projectName
+  // GitHub pages deployment config.
+  // If you aren't using GitHub pages, you don't need these.
+  organizationName: '<YOUR_GITHUB_USERNAME_OR_ORG>', // Usually your GitHub org/user name.
+  projectName: 'Bookplus_Chatbot', // Usually your repo name.
 
   onBrokenLinks: 'ignore',
 
@@ -80,10 +82,9 @@ const config: Config = {
           position: 'left',
           label: 'Tutorials',
         },
-        {to: '/about', label: 'About', position: 'left'},
-
-        { // Mueza Ejaz's GitHub link from main branch
-          href: 'https://github.com/Mueza-Ejaz',
+        {to: '/blog', label: 'Blog', position: 'left'},
+        {
+          href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
           position: 'right',
           className: 'header-github-link', // Use 'header-github-link' for consistency

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { ChatKit, useChatKit } from '@openai/chatkit-react';
 import { ChatBotProvider } from './ChatBotProvider';
+import '../../css/chatbot.css'; // Import the new chatbot styles
+import { MessageList } from './MessageList';
+import { MessageInput } from './MessageInput';
 
 export const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false); // Manages widget visibility
@@ -69,12 +72,14 @@ export const ChatWidget: React.FC = () => {
               <h3 style={{ margin: 0, color: 'white' }}>Chat with AI</h3>
               <button onClick={toggleChat}>X</button>
             </div>
-            <div style={{ flexGrow: 1, overflowY: 'auto' }}>
-              <ChatKit control={control} />
+            <div className="chat-messages-container">
+              <MessageList />
             </div>
+            <MessageInput />
           </div>
         )}
       </div>
     </ChatBotProvider>
   );
 };
+
