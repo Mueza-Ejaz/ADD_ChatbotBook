@@ -114,6 +114,7 @@
   padding: 15px 30px; /* Adjusted padding */
   color: white; /* Ensure text is white */
   font-weight: bold;
+  font-size: 1.4em; /* Increased font size */
   text-decoration: none;
   display: flex; /* Use flex to center content */
   align-items: center;
@@ -237,77 +238,6 @@
   .primaryCtaButton {
     width: 100%; /* Full width on smaller mobile screens */
     max-width: none;
-  }
-}
-
-/* Footer styles */
-.homepageFooter {
-  background-color: var(--glass-background);
-  backdrop-filter: var(--glass-backdrop-filter);
-  border: var(--glass-border);
-  border-radius: var(--glass-border-radius);
-  box-shadow: var(--glass-box-shadow);
-  padding: 30px 20px;
-  margin: 20px;
-  text-align: center;
-}
-
-.homepageFooter .container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  text-align: left;
-}
-
-.footerHeading {
-  color: var(--ifm-font-color-base);
-  margin-bottom: 15px;
-  font-size: 1.2rem;
-}
-
-.footerLinks {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footerLinks li {
-  margin-bottom: 8px;
-}
-
-.footerLinks a {
-  color: var(--ifm-font-color-secondary);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.footerLinks a:hover {
-  color: var(--ifm-color-primary);
-  text-decoration: underline;
-}
-
-.footerCopyright {
-  margin-top: 30px;
-  color: var(--ifm-font-color-secondary);
-  font-size: 0.9rem;
-  text-align: center;
-  width: 100%; /* Ensure copyright text is centered below columns */
-}
-
-/* Responsive adjustments for footer */
-@media screen and (max-width: 768px) {
-  .homepageFooter .container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .homepageFooter .col {
-    margin-bottom: 20px;
-    width: 100%;
-  }
-
-  .homepageFooter .col:last-child {
-    margin-bottom: 0;
   }
 }
 

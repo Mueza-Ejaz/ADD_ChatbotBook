@@ -25,6 +25,7 @@ const config: Config = {
   ],
   stylesheets: [
     'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   ],
 
   // GitHub pages deployment config.
@@ -95,8 +96,8 @@ const config: Config = {
           position: 'left',
           label: 'Tutorials',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
-        {to: '/resources', label: 'Resources', position: 'left'}, // Assuming a /resources page
+        {to: '/about', label: 'About', position: 'left'},
+
         {
           href: 'https://github.com/facebook/docusaurus', // Placeholder for actual repo
           position: 'right',
