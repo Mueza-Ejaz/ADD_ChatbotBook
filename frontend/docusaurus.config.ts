@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Physical AI & Humanoid Robotics Textbook',
-  tagline: 'An AI-Native Textbook',
+  tagline: 'Tutorial Blog',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -82,23 +82,31 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Physical AI & Humanoid Robotics',
-      logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
-      },
+      title: 'Humanoid Robotics', // Main text
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          to: '/', // Home
+          label: 'Home',
           position: 'left',
-          label: 'Tutorial',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'tutorialSidebar', // Assuming this sidebar for tutorials
+          position: 'left',
+          label: 'Tutorials',
         },
         {to: '/blog', label: 'Blog', position: 'left'},
+        {to: '/resources', label: 'Resources', position: 'left'}, // Assuming a /resources page
         {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
+          href: 'https://github.com/facebook/docusaurus', // Placeholder for actual repo
           position: 'right',
+          className: 'header-github-link', // Custom class for styling
+          'aria-label': 'GitHub repository',
+        },
+        {
+          type: 'search', // Docusaurus built-in search
+          position: 'right',
+          className: 'header-search-icon', // Custom class for styling
         },
       ],
     },

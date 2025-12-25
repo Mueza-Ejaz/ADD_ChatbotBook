@@ -8,6 +8,9 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  background-color: transparent !important; /* Make it transparent */
+  border: 2px solid var(--ifm-color-success); /* Green border */
+  color: var(--ifm-font-color-base); /* Ensure text is visible (light in dark mode) */
 }
 
 @media screen and (max-width: 996px) {
@@ -20,4 +23,366 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* New styles for the single-column layout */
+.homepageContainer {
+  /* No display: flex needed for single column */
+  /* min-height removed */
+  padding: 20px; /* Add padding to the container */
+}
+
+.mainContent {
+  /* No flex: 1 needed for single column */
+  background-color: var(--glass-background);
+  backdrop-filter: var(--glass-backdrop-filter);
+  border: var(--glass-border);
+  border-radius: var(--glass-border-radius);
+  box-shadow: var(--glass-box-shadow);
+  margin: 20px auto; /* Center main content */
+  max-width: 960px; /* Optional: set a max-width for better readability */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  opacity: 0; /* Initially hidden for fade-in */
+  animation: mainContentGlow 4s infinite alternate ease-in-out, fadeInContent 1.5s ease-out forwards 0.8s; /* Pulsing glow and Fade-in */
+}
+
+@keyframes mainContentGlow {
+  0% {
+    box-shadow: 0 0 15px rgba(var(--ifm-color-primary-rgb), 0.4), 0 0 25px rgba(var(--ifm-color-secondary-rgb), 0.3);
+  }
+  100% {
+    box-shadow: 0 0 25px rgba(var(--ifm-color-primary-rgb), 0.7), 0 0 40px rgba(var(--ifm-color-secondary-rgb), 0.5); /* More vibrant glow */
+  }
+}
+
+@keyframes fadeInContent {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mainContentHeader {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.bookTitle {
+  font-size: 4.5rem; /* BIG */
+  font-weight: 900; /* BOLD */
+  margin-bottom: 10px;
+  background: linear-gradient(to right, #4361ee, #06b6d4); /* Blue to Cyan gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(67, 97, 238, 0.3); /* 3D effect text shadow */
+  line-height: 1.1; /* Adjust line height for big text */
+}
+
+.bookSubtitle {
+  font-size: 1.5rem;
+  color: #b0b7c3; /* Light silver color */
+  margin-bottom: 20px;
+  text-transform: uppercase; /* Small caps style */
+  letter-spacing: 0.1em; /* Add some spacing for small caps */
+  opacity: 0; /* Initially hidden for fade-in */
+  animation: fadeInSubtitle 2s ease-out forwards 0.5s; /* Fade-in with delay */
+}
+
+@keyframes fadeInSubtitle {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.primaryCtaButton {
+  /* Complete Redesign for "Start Learning Now" button */
+  height: 60px; /* Large and prominent size */
+  width: 280px; /* Large and prominent size */
+  background: linear-gradient(135deg, #4361ee, #3a0ca3); /* Specified gradient background */
+  border-radius: 12px; /* Rounded corners */
+  padding: 15px 30px; /* Adjusted padding */
+  color: white; /* Ensure text is white */
+  font-weight: bold;
+  text-decoration: none;
+  display: flex; /* Use flex to center content */
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+  border: 2px solid transparent; /* Transparent border for gradient effect */
+  cursor: pointer; /* Indicate it's clickable */
+  box-shadow: 0 8px 25px rgba(67, 97, 238, 0.3); /* Subtle shadow */
+}
+
+.primaryCtaButton:hover {
+  transform: scale(1.05); /* Scale up slightly */
+  background: linear-gradient(135deg, #5f7bf5, #4c28b3); /* Brighter blue gradient on hover */
+  box-shadow: 0 0 35px rgba(67, 97, 238, 0.8), 0 0 50px rgba(58, 12, 163, 0.5); /* Enhanced glow effect */
+  border-image: linear-gradient(45deg, var(--ifm-color-primary), var(--ifm-color-secondary)) 1; /* Gradient border */
+}
+
+.featureCardsSection {
+  padding: 20px 0;
+}
+
+.featureCardsSection .row { /* Target the row containing feature cards */
+  align-items: stretch; /* Make all cards the same height */
+  gap: 30px; /* Space between cards */
+}
+
+.sectionHeading {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--ifm-font-color-base);
+  font-family: 'Montserrat', sans-serif; /* Ensure modern sans-serif */
+  font-weight: bold; /* Explicitly bold */
+  position: relative; /* For underline positioning */
+  padding-bottom: 10px; /* Space for underline */
+}
+
+.sectionHeading::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 100px; /* Underline width */
+  height: 3px; /* Underline thickness */
+  background: linear-gradient(to right, var(--ifm-color-primary), var(--ifm-color-secondary)); /* Blue to Purple gradient */
+  border-radius: 5px; /* Rounded ends */
+  box-shadow: 0 0 8px rgba(var(--ifm-color-primary-rgb), 0.5); /* Subtle glow for underline */
+}
+
+/* Feature Card styling from HomepageFeatures/styles.module.css */
+.featureCard {
+  background: rgba(20, 25, 45, 0.8); /* Glass effect background */
+  backdrop-filter: blur(15px); /* Glass effect blur */
+  border: 1px solid rgba(100, 120, 255, 0.2); /* Glass effect border */
+  border-radius: 16px; /* Glass effect border radius */
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4); /* Glass effect box shadow */
+  padding: 25px; /* Glass effect padding */
+  transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+  height: 100%; /* Ensure card fills available height */
+  display: flex; /* Use flex to align content within the card */
+  flex-direction: column;
+}
+
+.featureCard:hover {
+  transform: translateY(-8px); /* Float up effect */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 0 20px rgba(var(--ifm-color-primary-rgb), 1); /* Even stronger blue glow */
+  border-image: linear-gradient(45deg, var(--ifm-color-primary), var(--ifm-color-secondary)) 1; /* Gradient border */
+}
+
+.featureCardIcon {
+  font-size: 3rem; /* Large icon size */
+  margin-bottom: 15px;
+  line-height: 1; /* Prevent extra space around icon */
+}
+
+.smallCtaButton {
+  background: transparent; /* Transparent background */
+  border-radius: 8px; /* Slightly less rounded than primary button */
+  padding: 8px 15px;
+  color: var(--ifm-color-primary); /* Blue text */
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease-out;
+  border: 1px solid var(--ifm-color-primary); /* Blue border */
+  cursor: pointer;
+  margin-top: 15px; /* Space above the button */
+  align-self: flex-start; /* Align button to start within flex column */
+}
+
+.smallCtaButton:hover {
+  transform: scale(1.03); /* Scale up slightly less than primary button */
+  background-color: var(--ifm-color-primary); /* Fill with blue color */
+  color: white; /* Text turns white */
+  box-shadow: 0 0 10px rgba(var(--ifm-color-primary-rgb), 0.7); /* Subtle glow */
+  border-image: linear-gradient(45deg, var(--ifm-color-primary), var(--ifm-color-secondary)) 1; /* Gradient border */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 996px) {
+  .mainContent {
+    margin: 10px auto;
+  }
+
+  .bookTitle {
+    font-size: 2rem;
+  }
+
+  .bookSubtitle {
+    font-size: 1.2rem;
+  }
+
+  .primaryCtaButton {
+    width: auto;
+    max-width: 280px; /* or 100% if preferred for very small screens */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .primaryCtaButton {
+    width: 100%; /* Full width on smaller mobile screens */
+    max-width: none;
+  }
+}
+
+/* Footer styles */
+.homepageFooter {
+  background-color: var(--glass-background);
+  backdrop-filter: var(--glass-backdrop-filter);
+  border: var(--glass-border);
+  border-radius: var(--glass-border-radius);
+  box-shadow: var(--glass-box-shadow);
+  padding: 30px 20px;
+  margin: 20px;
+  text-align: center;
+}
+
+.homepageFooter .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  text-align: left;
+}
+
+.footerHeading {
+  color: var(--ifm-font-color-base);
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.footerLinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footerLinks li {
+  margin-bottom: 8px;
+}
+
+.footerLinks a {
+  color: var(--ifm-font-color-secondary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footerLinks a:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: underline;
+}
+
+.footerCopyright {
+  margin-top: 30px;
+  color: var(--ifm-font-color-secondary);
+  font-size: 0.9rem;
+  text-align: center;
+  width: 100%; /* Ensure copyright text is centered below columns */
+}
+
+/* Responsive adjustments for footer */
+@media screen and (max-width: 768px) {
+  .homepageFooter .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .homepageFooter .col {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .homepageFooter .col:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Section Divider Styles */
+.sectionDivider {
+  width: 80%; /* Width of the divider */
+  max-width: 600px;
+  height: 3px; /* Thickness */
+  margin: 40px auto; /* Spacing and center alignment */
+  background: linear-gradient(to right, var(--ifm-color-primary), var(--ifm-color-secondary)); /* Blue to Purple gradient */
+  border-radius: 5px; /* Rounded ends */
+  position: relative;
+  overflow: hidden; /* Hide overflow of pseudo-element */
+  box-shadow: 0 0 10px rgba(var(--ifm-color-primary-rgb), 0.5); /* Subtle glow */
+}
+
+.sectionDivider::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%; /* Start off-screen */
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  animation: dividerFlow 10s linear infinite; /* Animation for subtle flow */
+}
+
+@keyframes dividerFlow {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-left: 10px; /* Add padding for the accent border */
+}
+
+.cardAccentBorder {
+  width: 3px;
+  height: 100%; /* Will be height of the h3 */
+  background-color: #4361ee; /* Primary accent blue */
+  margin-right: 15px;
+  border-radius: 2px;
+  flex-shrink: 0; /* Prevent it from shrinking */
+}
+
+.cardHeader h3 {
+  margin: 0; /* Reset default h3 margin */
+  font-size: 1.8rem; /* Prominent title size */
+  color: var(--ifm-font-color-base);
+  font-weight: bold;
+}
+
+.cardBody {
+  margin-bottom: 20px;
+}
+
+.cardBody p {
+  line-height: 1.6;
+  color: var(--ifm-font-color-secondary);
+}
+
+.cardFooter {
+  margin-top: auto; /* Push footer to bottom */
+  text-align: right;
 }

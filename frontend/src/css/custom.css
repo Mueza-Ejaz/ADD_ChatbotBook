@@ -6,27 +6,27 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #1a56db; /* Deep blue */
-  --ifm-color-primary-dark: #174ab7;
-  --ifm-color-primary-darker: #1542a7;
-  --ifm-color-primary-darkest: #113586;
-  --ifm-color-primary-light: #2c68e0;
-  --ifm-color-primary-lighter: #3973e2;
-  --ifm-color-primary-lightest: #5b8deb;
+  --ifm-color-primary: #4361ee; /* Primary accent: Blue */
+  --ifm-color-primary-dark: #3a54cc;
+  --ifm-color-primary-darker: #354ca7;
+  --ifm-color-primary-darkest: #2a3c86;
+  --ifm-color-primary-light: #5f7bf5;
+  --ifm-color-primary-lighter: #829cf9;
+  --ifm-color-primary-lightest: #a8bdfd;
 
-  --ifm-color-secondary: #6b7280; /* Steel gray */
-  --ifm-color-success: #10b981; /* Green for success */
-  --ifm-color-danger: #dc2626;  /* Robotic orange/red */
+  --ifm-color-secondary: #7209b7; /* Secondary accent: Purple */
+  --ifm-color-success: #2ea043; /* Success Green */
+  --ifm-color-danger: #ef4444;  /* Robotic orange/red */
   --ifm-color-warning: #fbbf24; /* Yellow for warning */
-  --ifm-color-info: #3b82f6;    /* Blue for info */
+  --ifm-color-info: #06b6d4;    /* Highlights: Cyan */
 
-  --ifm-background-color: #f9fafb; /* Light gray for page */
-  --ifm-background-surface-color: #ffffff; /* Pure white for cards/surfaces */
+  --ifm-background-color: #282c34; /* Dark gray for page */
+  --ifm-background-surface-color: #3d4450; /* Darker surface color for cards/surfaces */
 
-  --ifm-font-color-base: rgb(17 24 39); /* gray-900 */
-  --ifm-font-color-secondary: rgb(107 114 128); /* gray-500 */
+  --ifm-font-color-base: #ffffff; /* Primary text */
+  --ifm-font-color-secondary: #b0b7c3; /* Secondary text */
 
-  --ifm-font-family-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --ifm-font-family-base: 'Inter', sans-serif;
   --ifm-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 
   --ifm-h1-font-size: 2.5rem;
@@ -39,31 +39,38 @@
   --ifm-font-size-base: 1rem; /* Base body font size */
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  /* Glass Effect Variables */
+  --glass-background: rgba(30, 35, 60, 0.7); /* Updated glass background */
+  --glass-border: 1px solid rgba(100, 120, 255, 0.2);
+  --glass-border-radius: 16px;
+  --glass-backdrop-filter: blur(15px);
+  --glass-box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #3b82f6; /* Slightly lighter blue for dark mode primary */
-  --ifm-color-primary-dark: #2563eb;
-  --ifm-color-primary-darker: #225ad3;
-  --ifm-color-primary-darkest: #1c48a7;
-  --ifm-color-primary-light: #60a5fa;
-  --ifm-color-primary-lighter: #93c5fd;
-  --ifm-color-primary-lightest: #bfdbfe;
+  --ifm-color-primary: #4361ee; /* Primary accent: Blue */
+  --ifm-color-primary-dark: #3a54cc;
+  --ifm-color-primary-darker: #354ca7;
+  --ifm-color-primary-darkest: #2a3c86;
+  --ifm-color-primary-light: #5f7bf5;
+  --ifm-color-primary-lighter: #829cf9;
+  --ifm-color-primary-lightest: #a8bdfd;
 
-  --ifm-color-secondary: #9ca3af; /* Lighter steel gray for dark mode */
-  --ifm-color-success: #34d399; /* Green for success */
+  --ifm-color-secondary: #7209b7; /* Secondary accent: Purple */
+  --ifm-color-success: #2ea043; /* Success Green */
   --ifm-color-danger: #ef4444;  /* Robotic orange/red */
-  --ifm-color-warning: #facc15; /* Yellow for warning */
-  --ifm-color-info: #60a5fa;    /* Blue for info */
+  --ifm-color-warning: #fbbf24; /* Yellow for warning */
+  --ifm-color-info: #06b6d4;    /* Highlights: Cyan */
 
-  --ifm-background-color: #1a202c; /* Dark background */
-  --ifm-background-surface-color: #2d3748; /* Darker surface color for cards/chat AI messages */
+  --ifm-background-color: #282c34; /* Dark gray for page */
+  --ifm-background-surface-color: #3d4450; /* Darker surface color for cards/chat AI messages */
 
-  --ifm-font-color-base: rgb(249 250 251); /* gray-50 */
-  --ifm-font-color-secondary: rgb(156 163 175); /* gray-400 */
+  --ifm-font-color-base: #ffffff; /* Primary text */
+  --ifm-font-color-secondary: #b0b7c3; /* Secondary text */
 
-  --ifm-font-family-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --ifm-font-family-base: 'Inter', sans-serif;
   --ifm-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 
   --ifm-h1-font-size: 2.5rem;
@@ -79,13 +86,39 @@
 
 /* Global styles using new design tokens */
 body {
-  font-family: var(--ifm-font-family-base);
+  font-family: 'Inter', sans-serif;
   color: var(--ifm-font-color-base);
-  background-color: var(--ifm-background-color);
+  background-attachment: fixed;
+  background-size: cover;
 }
 
+/* Animated Holo Design Background (Darker, Subtle Glow) */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Place behind content */
+  background-image: linear-gradient(160deg, #0a0a1a 0%, #1a1a2e 100%); /* New specified gradient */
+  background-size: 200% 200%; /* Larger background for subtle movement */
+  background-position: 0% 0%; /* Initial position */
+  animation: subtleGradientMove 20s ease infinite alternate; /* New animation for subtle movement */
+}
+
+@keyframes subtleGradientMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--ifm-font-family-base); /* Ensure headings use the new font stack */
+  font-family: 'Montserrat', sans-serif; /* Headings use Montserrat */
   color: var(--ifm-font-color-base);
 }
 
@@ -98,11 +131,11 @@ h6 { font-size: var(--ifm-h6-font-size); }
 
 a {
   color: var(--ifm-color-primary); /* Use primary color for links */
-  text-decoration: none;
+  text-decoration: none; /* Ensure no underline globally */
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none; /* Ensure no underline globally on hover */
 }
 
 /* Also ensure some Infima root variables use our new theme vars */
@@ -342,24 +375,65 @@ a:hover {
 
 /* Navbar */
 .navbar {
-  background-color: var(--ifm-background-surface-color); /* Lighter background for navbar */
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
-}
-
-.navbar__brand {
-  color: var(--ifm-font-color-base);
+  background-color: var(--glass-background);
+  backdrop-filter: var(--glass-backdrop-filter);
+  border: var(--glass-border);
+  border-radius: var(--glass-border-radius); /* Apply for consistency, might need adjustment later */
+  box-shadow: var(--glass-box-shadow);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200); /* Keep existing bottom border */
 }
 
 .navbar__title {
   color: var(--ifm-font-color-base);
+  font-weight: 800; /* Bolder */
+  font-size: 1.1rem; /* Decreased font size */
+  text-shadow: 0 0 10px rgba(var(--ifm-color-primary-rgb), 0.8); /* More visible glow */
+  transition: all 0.3s ease-in-out;
+  animation: navbarTitlePulse 3s infinite alternate ease-in-out; /* Pulsing animation */
+  text-decoration: none; /* Remove underline */
 }
 
-.navbar__item:hover {
-  color: var(--ifm-color-primary);
+.navbar__title:hover {
+  transform: scale(1.02); /* Subtle scale up on hover */
+  text-shadow: 0 0 12px rgba(var(--ifm-color-success-rgb), 1), 0 0 15px rgba(var(--ifm-color-primary-rgb), 0.8); /* Enhanced glow with accent */
+  cursor: pointer; /* Indicate it's clickable */
+}
+
+@keyframes navbarTitlePulse {
+  0% {
+    text-shadow: 0 0 10px rgba(var(--ifm-color-primary-rgb), 0.8);
+  }
+  100% {
+    text-shadow: 0 0 15px rgba(var(--ifm-color-primary-rgb), 1), 0 0 20px rgba(var(--ifm-color-primary-rgb), 0.6);
+  }
+}
+
+.navbar__item {
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar__link {
+  color: var(--ifm-font-color-base);
+  transition: all 0.3s ease-in-out;
+  text-decoration: none; /* Remove underline */
+}
+
+.navbar__item:hover .navbar__link,
+.navbar__link:hover {
+  color: var(--ifm-color-success); /* Change to green on hover */
+  text-shadow: 0 0 8px rgba(var(--ifm-color-success-rgb), 0.8); /* Green glow on hover */
+  transform: translateY(-3px); /* More noticeable lift on hover */
+  /* border-bottom: removed */
+  /* padding-bottom: removed */
+  text-decoration: none; /* Ensure no underline on hover */
 }
 
 .navbar__link--active {
-  color: var(--ifm-color-primary) !important;
+  color: var(--ifm-color-success) !important; /* Active link is green */
+  text-shadow: 0 0 8px rgba(var(--ifm-color-success-rgb), 0.8); /* Green glow for active link */
+  /* border-bottom: removed */
+  /* padding-bottom: removed */
+  text-decoration: none; /* Ensure no underline for active link */
 }
 
 /* Sidebar */
@@ -382,6 +456,10 @@ a:hover {
   font-weight: var(--ifm-font-weight-semibold);
   border-radius: 4px; /* Consistent border-radius */
   transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  transform: scale(1.05); /* Scale up on hover */
 }
 
 .button--primary {
@@ -506,5 +584,3 @@ a:hover {
     background-color: var(--ifm-background-color);
   }
 }
-
-
