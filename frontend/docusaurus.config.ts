@@ -84,7 +84,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/Mueza-Ejaz',
           label: 'GitHub',
           position: 'right',
           className: 'header-github-link', // Use 'header-github-link' for consistency

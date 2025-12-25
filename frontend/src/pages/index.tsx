@@ -69,7 +69,7 @@ export default function Home(): ReactNode {
                     <p>Dive deep into the algorithms and models driving intelligent systems and humanoid robots.</p>
                   </div>
                   <div className={styles.cardFooter}>
-                    <Link to="/module3" className={styles.smallCtaButton}>Learn More &rarr;</Link>
+                    <button type="button" className={styles.smallCtaButton}>Learn More &rarr;</button>
                   </div>
                 </div>
               </div>
@@ -84,7 +84,7 @@ export default function Home(): ReactNode {
                     <p>Understand the mechanics, control systems, and design principles of advanced humanoid forms.</p>
                   </div>
                   <div className={styles.cardFooter}>
-                    <Link to="/module1" className={styles.smallCtaButton}>Learn More &rarr;</Link>
+                    <button type="button" className={styles.smallCtaButton}>Learn More &rarr;</button>
                   </div>
                 </div>
               </div>
@@ -99,7 +99,7 @@ export default function Home(): ReactNode {
                     <p>Explore how robots learn from data and perceive their environment through cutting-edge ML techniques.</p>
                   </div>
                   <div className={styles.cardFooter}>
-                    <Link to="/module4" className={styles.smallCtaButton}>Learn More &rarr;</Link>
+                    <button type="button" className={styles.smallCtaButton}>Learn More &rarr;</button>
                   </div>
                 </div>
               </div>
