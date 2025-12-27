@@ -17,6 +17,7 @@ from src.services.rag_service import RAGService
 from src.config.logging import setup_logging # Import setup_logging
 
 load_dotenv()
+logger.info(f"Attempting to load INGESTION_API_KEY. Current value: {os.getenv('INGESTION_API_KEY')}")
 
 setup_logging() # Call setup_logging at the start
 
