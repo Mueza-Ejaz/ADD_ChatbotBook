@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, conlist
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime, timezone # Import timezone
 from uuid import UUID
 
@@ -12,6 +12,7 @@ class ChatResponse(BaseModel):
     response: str = Field(..., min_length=1, max_length=2000)
     session_id: UUID
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc)) # Use timezone.utc
+    sources: Optional[List[str]] = None
 
 class HealthResponse(BaseModel):
     status: str = Field(..., min_length=1, max_length=50)

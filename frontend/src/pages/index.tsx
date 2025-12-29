@@ -3,12 +3,9 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
-
-import RoboticsHeroSection from '@site/src/components/RoboticsHeroSection';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
@@ -23,7 +20,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
+            Go to Documentation 📖
           </Link>
         </div>
       </div>
@@ -37,78 +34,10 @@ export default function Home(): ReactNode {
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
-      <div className={styles.homepageContainer}>
-        {/* Main Content Area */}
-        <main className={styles.mainContent}>
-          <header className={styles.mainContentHeader}>
-            <h1 className={styles.bookTitle}>Physical AI & Humanoid Robotics</h1>
-            <p className={styles.bookSubtitle}>An AI-Native Textbook</p>
-            <div className={styles.buttons}>
-              <Link
-                className={styles.primaryCtaButton}
-                to="/docs/intro">
-                Start Learning Now
-              </Link>
-            </div>
-          </header>
-
-          <div className={styles.sectionDivider}></div>
-
-          {/* Interactive Feature Cards */}
-          <section className={styles.featureCardsSection}>
-            <h2 className={styles.sectionHeading}>Explore Key Concepts</h2>
-            <div className="row">
-              {/* Card 1: AI */}
-              <div className="col col--4">
-                <div className={clsx("padding-horiz--md", styles.featureCard)}>
-                  <div className={styles.cardHeader}>
-                    <div className={styles.cardAccentBorder}></div>
-                    <h3>Artificial Intelligence</h3>
-                  </div>
-                  <div className={styles.cardBody}>
-                    <p>Dive deep into the algorithms and models driving intelligent systems and humanoid robots.</p>
-                  </div>
-                  <div className={styles.cardFooter}>
-                    <Link to="/module3" className={styles.smallCtaButton}>Learn More &rarr;</Link>
-                  </div>
-                </div>
-              </div>
-              {/* Card 2: Robotics */}
-              <div className="col col--4">
-                <div className={clsx("padding-horiz--md", styles.featureCard)}>
-                  <div className={styles.cardHeader}>
-                    <div className={styles.cardAccentBorder}></div>
-                    <h3>Humanoid Robotics</h3>
-                  </div>
-                  <div className={styles.cardBody}>
-                    <p>Understand the mechanics, control systems, and design principles of advanced humanoid forms.</p>
-                  </div>
-                  <div className={styles.cardFooter}>
-                    <Link to="/module1" className={styles.smallCtaButton}>Learn More &rarr;</Link>
-                  </div>
-                </div>
-              </div>
-              {/* Card 3: Machine Learning */}
-              <div className="col col--4">
-                <div className={clsx("padding-horiz--md", styles.featureCard)}>
-                  <div className={styles.cardHeader}>
-                    <div className={styles.cardAccentBorder}></div>
-                    <h3>Machine Learning & Perception</h3>
-                  </div>
-                  <div className={styles.cardBody}>
-                    <p>Explore how robots learn from data and perceive their environment through cutting-edge ML techniques.</p>
-                  </div>
-                  <div className={styles.cardFooter}>
-                    <Link to="/module4" className={styles.smallCtaButton}>Learn More &rarr;</Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </main>
-      </div>
-
-      <RoboticsHeroSection />
+      <HomepageHeader />
+      <main>
+        {/* Removed HomepageFeatures */}
+      </main>
     </Layout>
   );
 }

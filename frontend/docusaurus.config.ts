@@ -2,26 +2,23 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
+// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+
 const config: Config = {
   title: 'Physical AI & Humanoid Robotics Textbook',
-  tagline: 'Tutorial Blog',
+  tagline: 'An AI-Native Textbook',
   favicon: 'img/favicon.ico',
 
+  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
-    v4: true,
+    v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
+  // Set the production url of your site here
   url: 'https://example.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/Bookplus_Chatbot/',
-
-  scripts: [
-    'https://cdn.platform.openai.com/deployments/chatkit/chatkit.js',
-  ],
-  stylesheets: [
-    'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap',
-  ],
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -30,6 +27,9 @@ const config: Config = {
 
   onBrokenLinks: 'ignore',
 
+  // Even if you don't use internationalization, you can use this field to set
+  // useful metadata like html lang. For example, if your site is Chinese, you
+  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -41,21 +41,12 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        // Removed blog plugin
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -64,36 +55,23 @@ const config: Config = {
   ],
 
   themeConfig: {
+    // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     colorMode: {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Humanoid Robotics',
+      title: 'Physical AI & Humanoid Robotics',
+      logo: {
+        alt: 'My Site Logo',
+        src: 'img/logo.svg',
+      },
       items: [
-        {
-          to: '/',
-          label: 'Home',
-          position: 'left',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Tutorials',
-        },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        // Removed docSidebar link
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
           position: 'right',
-          className: 'header-github-link', // Use 'header-github-link' for consistency
-          'aria-label': 'GitHub repository',
-        },
-        { // Docusaurus built-in search from our branch
-          type: 'search',
-          position: 'right',
-          className: 'header-search-icon', // Custom class for styling
         },
       ],
     },
@@ -104,8 +82,8 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: 'Module 1: Chapter 1',
+              to: '/docs/module-1/chapter-1',
             },
           ],
         },
@@ -117,31 +95,31 @@ const config: Config = {
               href: 'https://stackoverflow.com/questions/tagged/docusaurus',
             },
             {
-              label: 'LinkedIn',
-              href: 'https://www.linkedin.com/in/mueza-ejaz086',
+              label: 'Discord',
+              href: 'https://discordapp.com/invite/docusaurus',
             },
-            { label: 'X', href: 'https://x.com/' }
+            {
+              label: 'X',
+              href: 'https://x.com/docusaurus',
+            },
           ],
         },
         {
           title: 'More',
           items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
+            // Removed blog link
             {
               label: 'GitHub',
-              href: 'https://github.com/Mueza-Ejaz',
+              href: 'https://github.com/facebook/docusaurus',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Physical AI & Humanoid Robotics Textbook. Built with Mueza Ejaz.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Physical AI & Humanoid Robotics Textbook. Built with Docusaurus.`,
     },
     prism: {
-      theme: prismThemes.vsLight,
-      darkTheme: prismThemes.vsDark,
+      theme: prismThemes.github,
+      darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
 };

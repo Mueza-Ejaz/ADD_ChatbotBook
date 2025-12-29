@@ -1,0 +1,1 @@
+I am currently awaiting your response to the clarification question regarding "Selected Text Usage in RAG Search" which I outlined in `clarification_q1.md`. Please provide your choice (A, B, C, or Custom) to allow me to proceed with the specification.

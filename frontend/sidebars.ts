@@ -3,11 +3,6 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 const sidebars: SidebarsConfig = {
   tutorialSidebar: [
     {
-      type: 'doc',
-      id: 'intro', // points to website/docs/intro.md
-      label: 'Book Overview',
-    },
-    {
       type: 'category',
       label: 'Module 1: The Robotic Nervous System (ROS 2)',
       link: {
@@ -24,7 +19,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'Module 2: The Digital Twin (Gazebo & Unity)',
+      label: 'Module 2: Sensors and Perception',
       link: {
         type: 'generated-index',
         title: 'Module 2 Overview',
@@ -39,7 +34,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'Module 3: The AI-Robot Brain (NVIDIA Isaac)',
+      label: 'Module 3: Actuators and Control',
       link: {
         type: 'generated-index',
         title: 'Module 3 Overview',
@@ -54,7 +49,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'Module 4: Vision-Language-Action (VLA)',
+      label: 'Module 4: Human-Robot Interaction',
       link: {
         type: 'generated-index',
         title: 'Module 4 Overview',
