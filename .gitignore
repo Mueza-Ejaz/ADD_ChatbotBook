@@ -27,7 +27,3 @@ celerybeat-schedule
 *.swo
 *.bak
 *.tmp
-
-# Gemini CLI auxiliary files
-user_confirmation.md
-verification_instructions.md

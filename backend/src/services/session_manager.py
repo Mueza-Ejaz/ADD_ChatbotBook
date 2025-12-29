@@ -1,31 +1,36 @@
 from typing import Optional
-from uuid import UUID, uuid4
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
-from sqlalchemy import exc # Import for handling exceptions
+from uuid import UUID
+
 from src.models import ChatSession
-from src.exceptions import ChatSessionNotFoundException # Import from exceptions.py
+from src.repositories.chat_repository import ChatRepository
 
 class SessionManager:
-    def __init__(self, db_session: AsyncSession):
-        self.db_session = db_session
+    """
+    Manages chat session creation and retrieval.
+    """
+    def __init__(self, chat_repository: ChatRepository):
+        """
+        Initializes the SessionManager with a ChatRepository instance.
+
+        Args:
+            chat_repository (ChatRepository): An instance of ChatRepository for database operations.
+        """
+        self.chat_repository = chat_repository
 
     async def find_or_create_session(self, session_id: Optional[UUID]) -> ChatSession:
+        """
+        Finds an existing chat session or creates a new one if not found or not provided.
+
+        Args:
+            session_id (Optional[UUID]): The ID of the session to find. If None, a new session is created.
+
+        Returns:
+            ChatSession: The found or newly created chat session.
+        """
         if session_id:
-            # Try to find the session
-            result = await self.db_session.execute(
-                select(ChatSession).filter(ChatSession.id == session_id)
-            )
-            chat_session = result.scalars().first()
-            if chat_session:
-                return chat_session
-            else:
-                # If a session_id was provided but not found, raise an exception
-                raise ChatSessionNotFoundException(str(session_id)) # Convert UUID to string for exception
+            session = await self.chat_repository.find_session_by_id(session_id)
+            if session:
+                return session
         
-        # If no session_id provided or not found (and no exception raised), create a new one
-        new_session = ChatSession(id=uuid4()) # Generate new UUID for new session
-        self.db_session.add(new_session)
-        await self.db_session.commit()
-        await self.db_session.refresh(new_session)
-        return new_session
+        # If no session_id is provided, or if not found, create a new one
+        return await self.chat_repository.create_session()
