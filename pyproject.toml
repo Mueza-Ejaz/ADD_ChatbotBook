@@ -1,16 +1,19 @@
 [project]
 name = "fastapi-chat-backend"
 version = "0.1.0"
-description = ""
-authors = [
-    {name = "Yousuf Traders",email = "yousufraders777@gmail.com"}
-]
+description = "FastAPI backend for chatbot"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = [
+
+authors = [
+  { name = "Yousuf Traders", email = "yousufraders777@gmail.com" }
 ]
 
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn>=0.24"
+]
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core>=1.8.0"]
 build-backend = "poetry.core.masonry.api"
