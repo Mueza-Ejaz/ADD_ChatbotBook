@@ -6,7 +6,7 @@ authors = [
     {name = "Yousuf Traders",email = "yousufraders777@gmail.com"}
 ]
 readme = "README.md"
-requires-python = "3.12"
+requires-python = ">=3.12"
 dependencies = [
 ]
 
